@@ -1,9 +1,6 @@
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 const firebase = require("firebase");
-const express = require("express");
-const factsRoute = require("./routes/facts");
-const usersRoute = require("./routes/users");
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBXK_sc7ub8vZwqOJt1q6aXPg53WLkv3C4",
@@ -21,6 +18,10 @@ firebase.initializeApp(firebaseConfig);
 // default app is set in .firebaserc file
 admin.initializeApp();
 
+const express = require("express");
+const factsRoute = require("./routes/facts");
+const authRoute = require("./routes/auth");
+
 const app = express();
 
 // Body Parser
@@ -28,6 +29,6 @@ app.use(express.json());
 
 // Mount Routes
 app.use("/facts", factsRoute);
-app.use("/users", usersRoute);
+app.use("/auth", authRoute);
 
 exports.api = functions.region("australia-southeast1").https.onRequest(app);
