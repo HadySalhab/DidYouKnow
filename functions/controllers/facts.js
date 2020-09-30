@@ -1,12 +1,12 @@
 const constants = require("../utils/constants");
 const admin = require("firebase-admin");
 
+const db = admin.firestore();
+
 exports.getFacts = async (request, response) => {
 	const facts = [];
 	try {
-		const factsRef = admin
-			.firestore()
-			.collection(constants.factsCollectionName);
+		const factsRef = db.collection(constants.factsCollectionName);
 		const snapshot = await factsRef.orderBy("createdAt", "desc").get();
 		snapshot.forEach((doc) => {
 			facts.push({ id: doc.id, ...doc.data() });
@@ -32,7 +32,7 @@ exports.createFact = async (request, response) => {
 		answer: requestBody.answer,
 		createdAt: new Date().toISOString(),
 	};
-	const factsRef = admin.firestore().collection(constants.factsCollectionName);
+	const factsRef = db.collection(constants.factsCollectionName);
 	try {
 		const docRef = await factsRef.add(newFact);
 		const doc = await docRef.get();
