@@ -1,4 +1,3 @@
-const functions = require("firebase-functions");
 const constants = require("../utils/constants");
 const admin = require("firebase-admin");
 
