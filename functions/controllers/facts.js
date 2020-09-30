@@ -8,7 +8,7 @@ exports.getFacts = async (request, response) => {
 		const factsRef = admin
 			.firestore()
 			.collection(constants.factsCollectionName);
-		const snapshot = await factsRef.get();
+		const snapshot = await factsRef.orderBy("createdAt", "desc").get();
 		snapshot.forEach((doc) => {
 			facts.push({ id: doc.id, ...doc.data() });
 		});
