@@ -31,7 +31,7 @@ exports.createFact = async (request, response) => {
 		owner: requestBody.owner,
 		question: requestBody.question,
 		answer: requestBody.answer,
-		createdAt: admin.firestore.Timestamp.fromDate(new Date()),
+		createdAt: new Date().toISOString(),
 	};
 	const factsRef = admin.firestore().collection(constants.factsCollectionName);
 	try {
