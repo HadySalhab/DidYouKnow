@@ -14,4 +14,4 @@ app.use(express.json());
 // Mount Routes
 app.use("/facts", factsRoute);
 
-exports.api = functions.https.onRequest(app);
+exports.api = functions.region("australia-southeast1").https.onRequest(app);
