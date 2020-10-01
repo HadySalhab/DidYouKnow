@@ -1,5 +1,5 @@
 const constants = require("../utils/constants");
-const { db } = require("../config/db");
+const db = require("../config/db");
 
 exports.getFacts = async (request, response) => {
 	const facts = [];

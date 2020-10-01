@@ -1,4 +1,6 @@
-const { db, admin } = require("../config/db");
+const admin = require("firebase-admin");
+const db = require("../config/db");
+
 exports.protect = async (request, response, next) => {
 	try {
 		let token;

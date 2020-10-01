@@ -1,6 +1,6 @@
 const firebase = require("firebase");
 const { isNullOrEmpty, isEmail } = require("../utils/validators");
-const { db } = require("../config/db");
+const db = require("../config/db");
 
 exports.signup = async (request, response) => {
 	try {
