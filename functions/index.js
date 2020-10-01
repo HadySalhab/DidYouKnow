@@ -34,6 +34,9 @@ exports.createNotificationOnLike = functions
 		const factDocSnapshot = await db
 			.doc(`/facts/${likeDocSnapshot.data().fact}`)
 			.get();
+		if (likeDocSnapshot.data().username === factDocSnapshot.data().username) {
+			return; //no need to create a notification when user likes his own fact
+		}
 		try {
 			await db.doc(`/notifications/${likeDocSnapshot.id}`).set({
 				createdAt: new Date().toISOString(),
@@ -66,6 +69,11 @@ exports.createNotificationOnComment = functions
 		const factDocSnapshot = await db
 			.doc(`/facts/${commentDocSnapshot.data().fact}`)
 			.get();
+		if (
+			commentDocSnapshot.data().username === factDocSnapshot.data().username
+		) {
+			return; //no need to create a notification when user post comment on his own fact
+		}
 		try {
 			await db.doc(`/notifications/${commentDocSnapshot.id}`).set({
 				createdAt: new Date().toISOString(),
