@@ -1,7 +1,6 @@
 const firebase = require("firebase");
-const admin = require("firebase-admin");
 const { isNullOrEmpty, isEmail } = require("../utils/validators");
-const db = admin.firestore();
+const { db } = require("../config/db");
 
 exports.signup = async (request, response) => {
 	try {

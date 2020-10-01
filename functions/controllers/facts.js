@@ -1,7 +1,5 @@
 const constants = require("../utils/constants");
-const admin = require("firebase-admin");
-
-const db = admin.firestore();
+const { db } = require("../config/db");
 
 exports.getFacts = async (request, response) => {
 	const facts = [];

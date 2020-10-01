@@ -1,6 +1,4 @@
-const admin = require("firebase-admin");
-
-const db = admin.firestore();
+const { db, admin } = require("../config/db");
 exports.protect = async (request, response, next) => {
 	try {
 		let token;
