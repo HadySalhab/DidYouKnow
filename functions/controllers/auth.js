@@ -65,10 +65,10 @@ exports.signup = async (request, response) => {
 		});
 	} catch (error) {
 		console.log(error);
-		if (error.code === "auth/email-already-in-use") {
+		if (error.code.startsWith("auth/")) {
 			return response.status(400).json({
 				success: false,
-				message: "The email address is already in use by another account.",
+				message: error.message,
 			});
 		} else {
 			return response.status(500).json({
@@ -110,13 +110,10 @@ exports.login = async (request, response) => {
 		});
 	} catch (error) {
 		console.log(error);
-		if (
-			error.code === "auth/wrong-password" ||
-			error.code === "auth/user-not-found"
-		) {
+		if (error.code.startsWith("auth/")) {
 			return response.status(404).json({
 				success: false,
-				message: "Invalid credentials",
+				message: error.message,
 			});
 		}
 		return response.status(500).json({
