@@ -2,6 +2,7 @@ const constants = require("../utils/constants");
 const db = require("../config/db");
 const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/ErrorResponse");
+const { request, response } = require("express");
 
 // @desc      Get all facts
 // @route     GET /facts
@@ -74,4 +75,24 @@ exports.getFact = asyncHandler(async (request, response, next) => {
 			comments,
 		},
 	});
+});
+
+// @desc      Delete a single fact
+// @route     DELETE /facts/:factId
+// @access    Private
+module.exports.deleteFact = asyncHandler(async (request, response, next) => {
+	const factDocSnapshot = await db.doc(`/facts/${request.params.factId}`).get();
+	if (factDocSnapshot.exists) {
+		// check if fact owner
+		if (request.user.username !== factDocSnapshot.data().username) {
+			next(new ErrorResponse("Unauthorized", 403));
+		}
+		await factDocSnapshot.ref.delete();
+		return response.status(200).json({
+			success: true,
+			data: {},
+		});
+	} else {
+		next(new ErrorResponse("Resource not found", 404));
+	}
 });
