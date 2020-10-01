@@ -11,10 +11,19 @@ exports.getAllFacts = asyncHandler(async (request, response, next) => {
 	const facts = [];
 
 	const factsRef = db.collection(constants.factsCollectionName);
-	const snapshot = await factsRef.orderBy("createdAt", "desc").get();
-	snapshot.forEach((doc) => {
-		facts.push({ id: doc.id, ...doc.data() });
+	const factsQuerySnapshot = await factsRef.orderBy("createdAt", "desc").get();
+	factsQuerySnapshot.forEach((factDoc) => {
+		facts.push({
+			id: factDoc.id,
+			...factDoc.data(),
+		});
 	});
+
+	for (factDoc of facts) {
+		const userDocSnapshot = await db.doc(`/users/${factDoc.username}`).get();
+		factDoc.username = userDocSnapshot.data(); //populating user
+	}
+
 	return response.status(200).json({
 		success: true,
 		data: facts,
