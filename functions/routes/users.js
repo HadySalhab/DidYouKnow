@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { uploadImage } = require("../controllers/users");
+const { uploadImage, updateUserDetails } = require("../controllers/users");
 const { protect } = require("../middlewares/auth");
 
 router.post("/me/image", protect, uploadImage);
-
+router.post("/me/details", protect, updateUserDetails);
 module.exports = router;

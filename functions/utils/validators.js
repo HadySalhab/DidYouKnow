@@ -6,3 +6,10 @@ exports.isEmail = (email) =>
 	)
 		? true
 		: false;
+
+exports.isValidUrl = (website) =>
+	website.match(
+		/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
+	)
+		? true
+		: false;
