@@ -8,7 +8,7 @@ const firebaseConfig = require("./config/config");
 firebase.initializeApp(firebaseConfig);
 
 const functions = require("firebase-functions");
-
+const errorHandler = require("./middlewares/errorHandler");
 const express = require("express");
 const factsRoute = require("./routes/facts");
 const authRoute = require("./routes/auth");
@@ -21,5 +21,6 @@ app.use(express.json());
 // Mount Routes
 app.use("/facts", factsRoute);
 app.use("/auth", authRoute);
+app.use(errorHandler);
 
 exports.api = functions.region("australia-southeast1").https.onRequest(app);
