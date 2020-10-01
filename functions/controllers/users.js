@@ -143,3 +143,58 @@ module.exports.getAuthenticatedUserDetails = asyncHandler(
 		});
 	}
 );
+
+// @desc      Get a single user
+// @route     GET /users/:username
+// @access    Public
+module.exports.getUserDetails = asyncHandler(
+	async (request, response, next) => {
+		let facts = [];
+		const userDocSnapshot = await db
+			.doc(`/users/${request.params.username}`)
+			.get();
+
+		if (userDocSnapshot.exists) {
+			const factQuerySnapshot = await db
+				.collection("facts")
+				.where("username", "==", request.params.username)
+				.orderBy("createdAt", "desc")
+				.get();
+
+			factQuerySnapshot.forEach((factDoc) => {
+				facts.push({
+					id: factDoc.id,
+					...factDoc.data(),
+				});
+			});
+			return response.status(200).json({
+				success: true,
+				data: {
+					...userDocSnapshot.data(),
+					facts,
+				},
+			});
+		} else {
+			next(new ErrorResponse("Resource not found", 404));
+		}
+	}
+);
+
+// @desc      Mark notifications read
+// @route     POST /users/me/notifications
+// @access    Private
+module.exports.markNotificationsRead = asyncHandler(
+	async (request, response, next) => {
+		let batch = db.batch(); //update multiple docs at once
+		const notificationIds = request.body;
+		notificationIds.forEach((notificationId) => {
+			const notificationDocRef = db.doc(`/notifications/${notificationId}`);
+			batch.update(notificationDocRef, { read: true });
+		});
+		await batch.commit();
+		return response.status(200).json({
+			success: true,
+			data: {},
+		});
+	}
+);
