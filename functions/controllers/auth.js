@@ -78,3 +78,50 @@ exports.signup = async (request, response) => {
 		}
 	}
 };
+
+exports.login = async (request, response) => {
+	try {
+		const requestBody = request.body;
+		if (isNullOrEmpty(requestBody.email)) {
+			return response.status(400).json({
+				success: false,
+				message: "Please provide an email",
+			});
+		}
+		if (!isEmail(requestBody.email)) {
+			return response.status(400).json({
+				success: false,
+				message: "Please provide a valid email",
+			});
+		}
+		if (isNullOrEmpty(requestBody.password)) {
+			return response.status(400).json({
+				success: false,
+				message: "Please provide a password",
+			});
+		}
+		const newAuthUser = await firebase
+			.auth()
+			.signInWithEmailAndPassword(requestBody.email, requestBody.password);
+		const token = await newAuthUser.user.getIdToken();
+		return response.status(200).json({
+			success: true,
+			data: token,
+		});
+	} catch (error) {
+		console.log(error);
+		if (
+			error.code === "auth/wrong-password" ||
+			error.code === "auth/user-not-found"
+		) {
+			return response.status(404).json({
+				success: false,
+				message: "Invalid credentials",
+			});
+		}
+		return response.status(500).json({
+			success: false,
+			message: "Internal Server Error",
+		});
+	}
+};
