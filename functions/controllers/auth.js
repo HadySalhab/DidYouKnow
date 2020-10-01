@@ -65,7 +65,7 @@ exports.signup = async (request, response) => {
 		});
 	} catch (error) {
 		console.log(error);
-		if (error.code.startsWith("auth/")) {
+		if (error.code && error.code.startsWith("auth/")) {
 			return response.status(400).json({
 				success: false,
 				message: error.message,
@@ -110,7 +110,7 @@ exports.login = async (request, response) => {
 		});
 	} catch (error) {
 		console.log(error);
-		if (error.code.startsWith("auth/")) {
+		if (error.code && error.code.startsWith("auth/")) {
 			return response.status(404).json({
 				success: false,
 				message: error.message,
