@@ -96,30 +96,49 @@ module.exports.updateAuthenticatedUserDetails = asyncHandler(
 	}
 );
 
-// @desc      Get user details
+// @desc      Get authenticated user details
 // @route     GET /users/me/details
 // @access    Private
 module.exports.getAuthenticatedUserDetails = asyncHandler(
 	async (request, response, next) => {
 		const likes = [];
+		const notifications = [];
+
 		const userDocSnapshot = await db
 			.doc(`/users/${request.user.username}`)
 			.get();
-		const userLikesSnapshot = await db
+
+		const userLikesQuerySnapshot = await db
 			.collection("likes")
 			.where("username", "==", request.user.username)
 			.get();
-		userLikesSnapshot.forEach((userLikesDoc) => {
+
+		userLikesQuerySnapshot.forEach((userLikesDoc) => {
 			likes.push({
 				id: userLikesDoc.id,
 				...userLikesDoc.data(),
 			});
 		});
+		const notificationsQuerySnapshot = await db
+			.collection("notifications")
+			.where("receiver", "==", request.user.username)
+			.orderBy("createdAt", "desc")
+			.limit(10)
+			.get();
+
+		notificationsQuerySnapshot.forEach((notificationDoc) => {
+			notifications.push({
+				id: notificationDoc.id,
+				...notificationDoc.data(),
+			});
+		});
+
 		return response.status(200).json({
 			success: true,
 			data: {
 				...userDocSnapshot.data(),
 				likes,
+				notifications,
 			},
 		});
 	}
