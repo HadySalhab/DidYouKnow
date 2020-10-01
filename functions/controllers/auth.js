@@ -6,6 +6,9 @@ const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/ErrorResponse");
 const constants = require("../utils/constants");
 
+// @desc      Signup user
+// @route     POST /auth/signup
+// @access    Public
 exports.signup = asyncHandler(async (request, response, next) => {
 	const requestBody = request.body;
 
@@ -54,6 +57,9 @@ exports.signup = asyncHandler(async (request, response, next) => {
 	});
 });
 
+// @desc      Login user
+// @route     POST /auth/login
+// @access    Public
 exports.login = asyncHandler(async (request, response, next) => {
 	const requestBody = request.body;
 	if (isNullOrEmpty(requestBody.email)) {

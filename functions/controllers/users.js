@@ -9,6 +9,9 @@ const db = require("../config/db");
 const { v4 } = require("uuid");
 const ErrorResponse = require("../utils/ErrorResponse");
 
+// @desc      Upload image for authenticated user
+// @route     POST /users/me/image
+// @access    Private
 module.exports.uploadImage = asyncHandler(async (request, response, next) => {
 	let imageToUpload = {};
 	let imageFileName;

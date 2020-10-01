@@ -2,6 +2,9 @@ const constants = require("../utils/constants");
 const db = require("../config/db");
 const asyncHandler = require("../middlewares/asyncHandler");
 
+// @desc      Get all facts
+// @route     GET /facts
+// @access    Public
 exports.getFacts = asyncHandler(async (request, response, next) => {
 	const facts = [];
 
@@ -16,6 +19,9 @@ exports.getFacts = asyncHandler(async (request, response, next) => {
 	});
 });
 
+// @desc      Create a fact
+// @route     POST /facts
+// @access    Private
 exports.createFact = asyncHandler(async (request, response, next) => {
 	const requestBody = request.body;
 	const newFact = {
