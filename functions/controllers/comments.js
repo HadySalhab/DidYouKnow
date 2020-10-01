@@ -9,7 +9,7 @@ const { isNullOrEmpty } = require("../utils/validators");
 module.exports.addComment = asyncHandler(async (request, response, next) => {
 	const requestBody = request.body;
 	if (isNullOrEmpty(requestBody.body.trim())) {
-		next(new ErrorResponse("Comment body cannot be empty", 400));
+		return next(new ErrorResponse("Comment body cannot be empty", 400));
 	}
 	const newComment = {
 		username: request.user.username,
@@ -19,7 +19,7 @@ module.exports.addComment = asyncHandler(async (request, response, next) => {
 	};
 	const factDocSnapshot = await db.doc(`/facts/${request.params.factId}`).get();
 	if (!factDocSnapshot.exists) {
-		next(new ErrorResponse("Fact not found", 404));
+		return next(new ErrorResponse("Fact not found", 404));
 	}
 
 	const commentDocReference = await db.collection("comments").add(newComment);

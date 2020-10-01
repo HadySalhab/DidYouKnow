@@ -76,7 +76,7 @@ module.exports.updateAuthenticatedUserDetails = asyncHandler(
 			if (isValidUrl(requestBody.website.trim())) {
 				newBody.website = requestBody.website;
 			} else {
-				next(new ErrorResponse("Please add a valid URL", 400));
+				return next(new ErrorResponse("Please add a valid URL", 400));
 			}
 		}
 		if (!isNullOrEmpty(requestBody.location.trim())) {
@@ -175,7 +175,7 @@ module.exports.getUserDetails = asyncHandler(
 				},
 			});
 		} else {
-			next(new ErrorResponse("Resource not found", 404));
+			return next(new ErrorResponse("Resource not found", 404));
 		}
 	}
 );

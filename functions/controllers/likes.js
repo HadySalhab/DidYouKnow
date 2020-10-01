@@ -35,7 +35,7 @@ module.exports.addLike = asyncHandler(async (request, response, next) => {
 			},
 		});
 	} else {
-		next(new ErrorResponse("Facts already liked", 400));
+		return next(new ErrorResponse("Facts already liked", 400));
 	}
 });
 

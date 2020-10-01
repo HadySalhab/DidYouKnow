@@ -62,7 +62,7 @@ exports.createFact = asyncHandler(async (request, response, next) => {
 exports.getFact = asyncHandler(async (request, response, next) => {
 	const factDocSnapshot = await db.doc(`/facts/${request.params.factId}`).get();
 	if (!factDocSnapshot.exists) {
-		next(new ErrorResponse("Resource not found", 404));
+		return next(new ErrorResponse("Resource not found", 404));
 	}
 	const commentDocSnapshot = await db
 		.collection("comments")
@@ -94,7 +94,7 @@ module.exports.deleteFact = asyncHandler(async (request, response, next) => {
 	if (factDocSnapshot.exists) {
 		// check if fact owner
 		if (request.user.username !== factDocSnapshot.data().username) {
-			next(new ErrorResponse("Unauthorized", 403));
+			return next(new ErrorResponse("Unauthorized", 403));
 		}
 		await factDocSnapshot.ref.delete();
 		return response.status(200).json({
@@ -102,6 +102,6 @@ module.exports.deleteFact = asyncHandler(async (request, response, next) => {
 			data: {},
 		});
 	} else {
-		next(new ErrorResponse("Resource not found", 404));
+		return next(new ErrorResponse("Resource not found", 404));
 	}
 });
