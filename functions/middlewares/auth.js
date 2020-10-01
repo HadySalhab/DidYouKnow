@@ -5,10 +5,10 @@ exports.protect = async (request, response, next) => {
 	try {
 		let token;
 		if (
-			req.headers.authorization &&
-			req.headers.authorization.startsWith("Bearer")
+			request.headers.authorization &&
+			request.headers.authorization.startsWith("Bearer")
 		) {
-			token = req.headers.authorization.split(" ")[1];
+			token = request.headers.authorization.split(" ")[1];
 		}
 		if (!token) {
 			return response.status(401).json({
@@ -24,9 +24,10 @@ exports.protect = async (request, response, next) => {
 			.limit(1)
 			.get();
 		const user = userRef.docs[0].data();
-		req.user = user;
+		request.user = user;
 		return next();
 	} catch (error) {
+		console.log(error);
 		if (error.code.startsWith("auth/")) {
 			return response.status(401).json({
 				success: false,
