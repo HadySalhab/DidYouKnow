@@ -28,7 +28,7 @@ exports.protect = async (request, response, next) => {
 		return next();
 	} catch (error) {
 		console.log(error);
-		if (error.code.startsWith("auth/")) {
+		if (error.code && error.code.startsWith("auth/")) {
 			return response.status(401).json({
 				success: false,
 				message: error.message,
