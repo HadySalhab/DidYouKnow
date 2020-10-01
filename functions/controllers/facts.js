@@ -30,6 +30,8 @@ exports.createFact = asyncHandler(async (request, response, next) => {
 		question: requestBody.question,
 		answer: requestBody.answer,
 		createdAt: new Date().toISOString(),
+		likeCount: 0,
+		commentCount: 0,
 	};
 	const factsRef = db.collection(constants.factsCollectionName);
 	const docRef = await factsRef.add(newFact);
@@ -39,6 +41,7 @@ exports.createFact = asyncHandler(async (request, response, next) => {
 		data: {
 			id: doc.id,
 			...doc.data(),
+			username: request.user, // populating user
 		},
 	});
 });
