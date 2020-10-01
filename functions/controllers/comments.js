@@ -21,8 +21,12 @@ module.exports.addComment = asyncHandler(async (request, response, next) => {
 	if (!factDocSnapshot.exists) {
 		next(new ErrorResponse("Fact not found", 404));
 	}
+
 	const commentDocReference = await db.collection("comments").add(newComment);
 	const commentDoc = await commentDocReference.get();
+	await factDocSnapshot.ref.update({
+		commentCount: factDocSnapshot.data().commentCount + 1,
+	});
 	return response.status(201).json({
 		success: true,
 		data: {
