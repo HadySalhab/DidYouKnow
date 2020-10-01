@@ -18,6 +18,7 @@ exports.protect = async (request, response, next) => {
 		}
 		const decodedToken = await admin.auth().verifyIdToken(token);
 		const authID = decodedToken.uid;
+		await admin.auth().getUser(authID); //to check if user exists
 		const userRef = await db
 			.collection("users")
 			.where("authID", "==", authID)
