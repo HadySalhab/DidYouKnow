@@ -12,6 +12,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const express = require("express");
 const factsRoute = require("./routes/facts");
 const authRoute = require("./routes/auth");
+const usersRoute = require("./routes/users");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 // Mount Routes
 app.use("/facts", factsRoute);
 app.use("/auth", authRoute);
+app.use("/users", usersRoute);
 app.use(errorHandler);
 
 exports.api = functions.region("australia-southeast1").https.onRequest(app);

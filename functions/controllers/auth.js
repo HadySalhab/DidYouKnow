@@ -1,8 +1,10 @@
 const firebase = require("firebase");
 const { isNullOrEmpty, isEmail } = require("../utils/validators");
 const db = require("../config/db");
+const config = require("../config/config");
 const asyncHandler = require("../middlewares/asyncHandler");
 const ErrorResponse = require("../utils/ErrorResponse");
+const constants = require("../utils/constants");
 
 exports.signup = asyncHandler(async (request, response, next) => {
 	const requestBody = request.body;
@@ -40,6 +42,7 @@ exports.signup = asyncHandler(async (request, response, next) => {
 		email: requestBody.email,
 		createdAt: new Date().toISOString(),
 		authID: newAuthUser.user.uid,
+		imageUrl: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${constants.defaultUserImageName}?alt=media`,
 	};
 
 	// https://stackoverflow.com/questions/47474522/firestore-difference-between-set-and-add
