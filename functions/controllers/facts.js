@@ -27,7 +27,7 @@ exports.getFacts = async (request, response) => {
 exports.createFact = async (request, response) => {
 	const requestBody = request.body;
 	const newFact = {
-		owner: requestBody.owner,
+		username: request.user.username,
 		question: requestBody.question,
 		answer: requestBody.answer,
 		createdAt: new Date().toISOString(),
