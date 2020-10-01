@@ -13,57 +13,59 @@ const { isNullOrEmpty, isValidUrl } = require("../utils/validators");
 // @desc      Upload authenticated user image
 // @route     POST /users/me/image
 // @access    Private
-module.exports.uploadImage = asyncHandler(async (request, response, next) => {
-	let imageToUpload = {};
-	let imageFileName;
-	let imageExtension;
-	const generatedToken = v4();
+module.exports.uploadAuthenticatedUserImage = asyncHandler(
+	async (request, response, next) => {
+		let imageToUpload = {};
+		let imageFileName;
+		let imageExtension;
+		const generatedToken = v4();
 
-	const busboy = new BusBoy({ headers: request.headers });
+		const busboy = new BusBoy({ headers: request.headers });
 
-	busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
-		if (
-			mimetype !== "image/jpeg" &&
-			mimetype !== "image/png" &&
-			mimetype !== "image/jpg"
-		) {
-			return next(new ErrorResponse("File type not supported", 400));
-		}
-		imageExtension = filename.split(".")[filename.split(".").length - 1];
-		imageFileName = `${request.user.username}.${imageExtension}`;
-		const filepath = path.join(os.tmpdir(), imageFileName);
-		imageToUpload = { filepath, mimetype };
-		file.pipe(fs.createWriteStream(filepath));
-	});
-
-	busboy.on("finish", async () => {
-		await admin
-			.storage()
-			.bucket()
-			.upload(imageToUpload.filepath, {
-				resumable: false,
-				metadata: {
-					metadata: {
-						contenType: imageToUpload.mimetype,
-						firebaseStorageDownloadTokens: generatedToken,
-					},
-				},
-			});
-		const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${imageFileName}?alt=media`;
-		await db.doc(`/users/${request.user.username}`).update({ imageUrl });
-		return response.json({
-			success: true,
-			data: imageUrl,
+		busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
+			if (
+				mimetype !== "image/jpeg" &&
+				mimetype !== "image/png" &&
+				mimetype !== "image/jpg"
+			) {
+				return next(new ErrorResponse("File type not supported", 400));
+			}
+			imageExtension = filename.split(".")[filename.split(".").length - 1];
+			imageFileName = `${request.user.username}.${imageExtension}`;
+			const filepath = path.join(os.tmpdir(), imageFileName);
+			imageToUpload = { filepath, mimetype };
+			file.pipe(fs.createWriteStream(filepath));
 		});
-	});
 
-	busboy.end(request.rawBody);
-});
+		busboy.on("finish", async () => {
+			await admin
+				.storage()
+				.bucket()
+				.upload(imageToUpload.filepath, {
+					resumable: false,
+					metadata: {
+						metadata: {
+							contenType: imageToUpload.mimetype,
+							firebaseStorageDownloadTokens: generatedToken,
+						},
+					},
+				});
+			const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${imageFileName}?alt=media`;
+			await db.doc(`/users/${request.user.username}`).update({ imageUrl });
+			return response.json({
+				success: true,
+				data: imageUrl,
+			});
+		});
+
+		busboy.end(request.rawBody);
+	}
+);
 
 // @desc      Upload authenticated user details
 // @route     POST /users/me/details
 // @access    Private
-module.exports.updateUserDetails = asyncHandler(
+module.exports.updateAuthenticatedUserDetails = asyncHandler(
 	async (request, response, next) => {
 		const requestBody = request.body;
 		const newBody = {};
@@ -89,6 +91,35 @@ module.exports.updateUserDetails = asyncHandler(
 			success: true,
 			data: {
 				...userDocSnapshot.data(),
+			},
+		});
+	}
+);
+
+// @desc      Get user details
+// @route     GET /users/me/details
+// @access    Private
+module.exports.getAuthenticatedUserDetails = asyncHandler(
+	async (request, response, next) => {
+		const likes = [];
+		const userDocSnapshot = await db
+			.doc(`/users/${request.user.username}`)
+			.get();
+		const userLikesSnapshot = await db
+			.collection("likes")
+			.where("username", "==", request.user.username)
+			.get();
+		userLikesSnapshot.forEach((userLikesDoc) => {
+			likes.push({
+				id: userLikesDoc.id,
+				...userLikesDoc.data(),
+			});
+		});
+		return response.status(200).json({
+			success: true,
+			data: {
+				...userDocSnapshot.data(),
+				likes,
 			},
 		});
 	}
