@@ -11,7 +11,7 @@ let db = {
 	],
 	users: [
 		{
-			authID: "BPwFympP2CUPvUR0tJcjG6gfplq2",
+			authId: "BPwFympP2CUPvUR0tJcjG6gfplq2",
 			email: "user@gmail.com",
 			username: "user123",
 			createdAt: "2020-09-30T13:12:22.470Z",

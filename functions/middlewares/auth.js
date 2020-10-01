@@ -17,11 +17,11 @@ exports.protect = async (request, response, next) => {
 			});
 		}
 		const decodedToken = await admin.auth().verifyIdToken(token);
-		const authID = decodedToken.uid;
-		await admin.auth().getUser(authID); //to check if user exists
+		const authId = decodedToken.uid;
+		await admin.auth().getUser(authId); //to check if user exists
 		const userRef = await db
 			.collection("users")
-			.where("authID", "==", authID)
+			.where("authId", "==", authId)
 			.limit(1)
 			.get();
 		const user = userRef.docs[0].data();

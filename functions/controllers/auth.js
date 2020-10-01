@@ -44,7 +44,7 @@ exports.signup = asyncHandler(async (request, response, next) => {
 		username: requestBody.username,
 		email: requestBody.email,
 		createdAt: new Date().toISOString(),
-		authID: newAuthUser.user.uid,
+		authId: newAuthUser.user.uid,
 		imageUrl: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${constants.defaultUserImageName}?alt=media`,
 	};
 
