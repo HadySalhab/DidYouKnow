@@ -1,10 +1,20 @@
 import React from "react";
 import "./App.css";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+
+// Pages
 
 function App() {
 	return (
 		<div className="App">
-			<h1>Did You Know</h1>
+			<BrowserRouter>
+				<Switch>
+					<Route exact path="/" component={HomePage} />
+					<Route exact path="/login" component={LoginPage} />
+				</Switch>
+			</BrowserRouter>
 		</div>
 	);
 }
