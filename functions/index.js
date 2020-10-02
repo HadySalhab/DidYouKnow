@@ -15,7 +15,9 @@ const authRoute = require("./routes/auth");
 const usersRoute = require("./routes/users");
 const db = require("./config/db");
 const app = express();
+const cors = require("cors");
 
+app.use(cors());
 // Body Parser
 app.use(express.json());
 
