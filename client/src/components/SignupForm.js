@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: "center",
 		marginBottom: "2rem",
 	},
-	signupFormPaper: {
+	formPaper: {
 		maxWidth: "25rem",
 		margin: "0 auto",
 	},
@@ -32,7 +32,7 @@ const SignupForm = () => {
 	return (
 		<div>
 			<Box style={{ marginBottom: "1rem" }}>
-				<Paper variant="outlined" square className={classes.signupFormPaper}>
+				<Paper variant="outlined" square className={classes.formPaper}>
 					<Box p={4}>
 						<Typography variant="h1" className={classes.formHeader}>
 							Did You{" "}
@@ -85,7 +85,7 @@ const SignupForm = () => {
 					</Box>
 				</Paper>
 			</Box>
-			<Paper variant="outlined" square className={classes.signupFormPaper}>
+			<Paper variant="outlined" square className={classes.formPaper}>
 				<Box p={2}>
 					<Typography align="center" color="textSecondary" component="p">
 						Already have an account?{" "}
