@@ -38,8 +38,14 @@ function getErrorResponse(error) {
 			) {
 				return new ErrorResponse(error.message, 401);
 			}
-			if (error.code === "auth/internal-error") {
+			if (
+				error.code === "auth/internal-error" ||
+				error.code === "auth/network-request-failed"
+			) {
 				return new ErrorResponse(error.message, 500);
+			}
+			if (error.code === "auth/too-many-requests") {
+				return new ErrorResponse(error.message, 429);
 			}
 		}
 		// https://firebase.google.com/docs/reference/js/firebase.firestore#firestoreerrorcode
