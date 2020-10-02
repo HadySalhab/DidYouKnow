@@ -29,7 +29,7 @@ const SignupPage = () => {
 			justify="center"
 			style={{ minHeight: "100vh" }}
 		>
-			<Grid item xs={0} md={6}>
+			<Grid item xs="auto" md={6}>
 				<Hidden only={["xs", "sm"]}>
 					<img
 						alt="Question Mark"

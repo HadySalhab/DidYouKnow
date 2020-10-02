@@ -24,13 +24,13 @@ const LoginFormContainer = ({ loginUser, user, history }) => {
 		setPassword,
 		setLoading,
 		setError,
-		setReset,
 	} = useAuthReducer();
 
 	useEffect(() => {
 		if (!_.isEmpty(user)) {
 			history.push("/");
 		}
+		// eslint-disable-next-line
 	}, [user]);
 
 	const onSubmit = async () => {
