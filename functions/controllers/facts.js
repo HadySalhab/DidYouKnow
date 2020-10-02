@@ -44,13 +44,13 @@ exports.createFact = asyncHandler(async (request, response, next) => {
 		commentCount: 0,
 	};
 	const factsRef = db.collection(constants.factsCollectionName);
-	const docRef = await factsRef.add(newFact);
-	const doc = await docRef.get();
+	const newFactDocRef = await factsRef.add(newFact);
+	const factDocSnapshot = await newFactDocRef.get();
 	return response.status(201).json({
 		success: true,
 		data: {
-			id: doc.id,
-			...doc.data(),
+			id: factDocSnapshot.id,
+			...factDocSnapshot.data(),
 			username: request.user, // populating user
 		},
 	});
