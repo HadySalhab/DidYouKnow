@@ -1,10 +1,47 @@
 import React from "react";
 
+// MUI
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+// Page
+import SignupForm from "./SignupForm";
+// Image
+import landingImage from "../assets/landing-image.png";
+
+const useStyles = makeStyles((theme) => ({
+	...theme.spreadThis,
+	image: {
+		width: "100%",
+		height: "100%",
+	},
+}));
+
 const HomePage = () => {
+	const classes = useStyles();
 	return (
-		<div>
-			<h1>Home Page</h1>
-		</div>
+		<Grid
+			container
+			spacing={0}
+			alignItems="center"
+			justify="center"
+			style={{ minHeight: "100vh" }}
+		>
+			<Grid item xs={0} md={6}>
+				<Hidden only={["xs", "sm"]}>
+					<img
+						alt="Question Mark"
+						className={classes.image}
+						src={landingImage}
+					/>
+				</Hidden>
+			</Grid>
+
+			<Grid item xs={12} md={6}>
+				<SignupForm />
+			</Grid>
+		</Grid>
 	);
 };
 

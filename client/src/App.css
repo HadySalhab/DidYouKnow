@@ -1,6 +1,30 @@
+:root {
+	--primary-txt-color: #323330;
+	--secondary-txt-color: #e0ac0a;
+}
+
 html,
 body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
 		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
+	background-color: rgb(245, 245, 245);
+}
+a {
+	text-decoration: none;
+}
+
+/* utility classes */
+.mx-auto {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.my-1 {
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+}
+
+.secondary-txt-color {
+	color: var(--secondary-txt-color) !important;
 }
