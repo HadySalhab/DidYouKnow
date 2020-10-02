@@ -26,15 +26,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const LoginPage = ({ user, history }) => {
+const LoginPage = ({ authUser, history }) => {
 	const classes = useStyles();
 
 	useEffect(() => {
-		if (!_.isEmpty(user)) {
+		if (!_.isEmpty(authUser)) {
 			history.push("/");
 		}
 		// eslint-disable-next-line
-	}, [user]);
+	}, [authUser]);
 
 	return (
 		<Grid
@@ -62,7 +62,7 @@ const LoginPage = ({ user, history }) => {
 };
 
 const mapStateToProps = (state) => ({
-	user: state.user,
+	authUser: state.user.authUser,
 });
 
 export default connect(mapStateToProps, null)(LoginPage);

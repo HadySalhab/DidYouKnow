@@ -14,7 +14,7 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { loginUser } from "../redux/actions/userActions";
 
-const LoginFormContainer = ({ loginUser, user, history }) => {
+const LoginFormContainer = ({ loginUser, authUser, history }) => {
 	const {
 		email,
 		password,
@@ -27,11 +27,11 @@ const LoginFormContainer = ({ loginUser, user, history }) => {
 	} = useAuthReducer();
 
 	useEffect(() => {
-		if (!_.isEmpty(user)) {
+		if (!_.isEmpty(authUser)) {
 			history.push("/");
 		}
 		// eslint-disable-next-line
-	}, [user]);
+	}, [authUser]);
 
 	const onSubmit = async () => {
 		const formData = { email, password };
@@ -63,7 +63,7 @@ const LoginFormContainer = ({ loginUser, user, history }) => {
 };
 
 const mapStateToProps = (state) => ({
-	user: state.user,
+	authUser: state.user.authUser,
 });
 const mapActionsToProps = {
 	loginUser,

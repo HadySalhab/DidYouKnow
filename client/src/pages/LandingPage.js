@@ -8,9 +8,9 @@ import { connect } from "react-redux";
 // Util
 import _ from "lodash";
 
-const LandingPage = ({ user, history }) => {
+const LandingPage = ({ authUser, history }) => {
 	const getMainPage = (routerProps) => {
-		if (_.isEmpty(user)) {
+		if (_.isEmpty(authUser)) {
 			return <SignupPage {...routerProps} />;
 		} else {
 			return <h1>authenticated</h1>;
@@ -29,7 +29,7 @@ const LandingPage = ({ user, history }) => {
 };
 
 const mapStateToProps = (state) => ({
-	user: state.user,
+	authUser: state.user.authUser,
 });
 
 export default connect(mapStateToProps, null)(LandingPage);
