@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const HomePage = () => {
+const LandingPage = () => {
 	const classes = useStyles();
 	return (
 		<Grid
@@ -50,4 +50,4 @@ const HomePage = () => {
 	);
 };
 
-export default HomePage;
+export default LandingPage;

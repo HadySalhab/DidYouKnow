@@ -8,7 +8,7 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 // Pages
-import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
 
 // Utils
 import themeObject from "./utils/theme";
@@ -22,7 +22,7 @@ function App() {
 				<BrowserRouter>
 					<Container maxWidth="md">
 						<Switch>
-							<Route exact path={["/", "/login"]} component={HomePage} />
+							<Route exact path={["/", "/login"]} component={LandingPage} />
 						</Switch>
 					</Container>
 				</BrowserRouter>
