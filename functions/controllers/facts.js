@@ -76,12 +76,18 @@ exports.getFact = asyncHandler(async (request, response, next) => {
 			...commentDoc.data(),
 		});
 	});
+
+	const userDocSnapshot = await db
+		.doc(`/users/${factDocSnapshot.data().username}`)
+		.get();
+
 	return response.status(200).json({
 		success: true,
 		data: {
 			id: factDocSnapshot.id,
 			...factDocSnapshot.data(),
 			comments,
+			username: userDocSnapshot.data(), //populating user
 		},
 	});
 });
