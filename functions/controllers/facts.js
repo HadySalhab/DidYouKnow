@@ -77,6 +77,13 @@ exports.getFact = asyncHandler(async (request, response, next) => {
 		});
 	});
 
+	for (comment of comments) {
+		const commentUserDocSnapshot = await db
+			.doc(`/users/${comment.username}`)
+			.get();
+		comment.username = commentUserDocSnapshot.data(); //populating comment owner
+	}
+
 	const userDocSnapshot = await db
 		.doc(`/users/${factDocSnapshot.data().username}`)
 		.get();
