@@ -45,13 +45,6 @@ const SignupForm = () => {
 							<TextField
 								className={classes.textField}
 								fullWidth
-								id="username"
-								label="Username"
-								variant="outlined"
-							/>
-							<TextField
-								className={classes.textField}
-								fullWidth
 								id="email"
 								label="Email Address"
 								variant="outlined"
@@ -61,13 +54,6 @@ const SignupForm = () => {
 								fullWidth
 								id="password"
 								label="Password"
-								variant="outlined"
-							/>
-							<TextField
-								className={classes.textField}
-								fullWidth
-								id="confirmPassword"
-								label="Confirm Password"
 								variant="outlined"
 							/>
 							<Box my="1rem">
@@ -88,9 +74,9 @@ const SignupForm = () => {
 			<Paper variant="outlined" square className={classes.signupFormPaper}>
 				<Box p={2}>
 					<Typography align="center" color="textSecondary" component="p">
-						Already have an account ?{" "}
-						<Link className={classes.link} to="/login">
-							Login
+						Don't have an account?{" "}
+						<Link className={classes.link} to="/">
+							Signup
 						</Link>
 					</Typography>
 				</Box>

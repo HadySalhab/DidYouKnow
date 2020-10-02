@@ -9,7 +9,6 @@ import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 // Pages
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
 
 // Utils
 import themeObject from "./utils/theme";
@@ -21,12 +20,11 @@ function App() {
 		<MuiThemeProvider theme={theme}>
 			<div className="App">
 				<BrowserRouter>
-					<Switch>
-						<Container maxWidth="md">
-							<Route exact path="/" component={HomePage} />
-							<Route exact path="/login" component={LoginPage} />
-						</Container>
-					</Switch>
+					<Container maxWidth="md">
+						<Switch>
+							<Route exact path={["/", "/login"]} component={HomePage} />
+						</Switch>
+					</Container>
 				</BrowserRouter>
 			</div>
 		</MuiThemeProvider>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 
 // MUI
 import Grid from "@material-ui/core/Grid";
@@ -6,7 +7,8 @@ import Hidden from "@material-ui/core/Hidden";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 // Page
-import SignupForm from "./SignupForm";
+import SignupForm from "../components/SignupForm";
+import LoginForm from "../components/LoginForm";
 // Image
 import landingImage from "../assets/landing-image.png";
 
@@ -39,7 +41,10 @@ const HomePage = () => {
 			</Grid>
 
 			<Grid item xs={12} md={6}>
-				<SignupForm />
+				<Switch>
+					<Route exact path="/" component={SignupForm} />
+					<Route exact path="/login" component={LoginForm} />
+				</Switch>
 			</Grid>
 		</Grid>
 	);
