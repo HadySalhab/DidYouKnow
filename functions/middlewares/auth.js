@@ -1,6 +1,7 @@
 const admin = require("firebase-admin");
 const db = require("../config/db");
 
+// Middleware to protect route if token is not available
 exports.protect = async (request, response, next) => {
 	try {
 		let token;

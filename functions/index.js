@@ -27,6 +27,8 @@ app.use(errorHandler);
 
 exports.api = functions.region("australia-southeast1").https.onRequest(app);
 
+// Triggers---------------
+
 exports.createNotificationOnLike = functions
 	.region("australia-southeast1")
 	.firestore.document("likes/{id}")
@@ -88,6 +90,7 @@ exports.createNotificationOnComment = functions
 		}
 	});
 
+// cascade delete
 exports.onFactDelete = functions
 	.region("australia-southeast1")
 	.firestore.document("facts/{id}")
