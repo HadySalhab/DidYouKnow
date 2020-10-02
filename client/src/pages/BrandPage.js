@@ -5,7 +5,6 @@ import landingImage from "../assets/landing-image.png";
 // MUI
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 import ReactAnimatedEllipsis from "react-animated-ellipsis";

@@ -15,7 +15,6 @@ import LoginFormContainer from "../components/LoginFormContainer";
 import { connect } from "react-redux";
 
 // Util
-import _ from "lodash";
 import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,15 +25,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const LoginPage = ({ authUser, history }) => {
+const LoginPage = ({ isAuthenticated, history }) => {
 	const classes = useStyles();
 
 	useEffect(() => {
-		if (!_.isEmpty(authUser)) {
+		if (isAuthenticated) {
 			history.push("/");
 		}
 		// eslint-disable-next-line
-	}, [authUser]);
+	}, [isAuthenticated]);
 
 	return (
 		<Grid
@@ -62,7 +61,7 @@ const LoginPage = ({ authUser, history }) => {
 };
 
 const mapStateToProps = (state) => ({
-	authUser: state.user.authUser,
+	isAuthenticated: state.authUser.isAuthenticated,
 });
 
 export default connect(mapStateToProps, null)(LoginPage);

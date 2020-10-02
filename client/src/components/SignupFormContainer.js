@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 // Components
 import SignupForm from "./SignupForm";
-
 // Hooks
 import useAuthReducer from "../hooks/useAuthReducer";
 // Util
@@ -15,7 +14,7 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { signupUser } from "../redux/actions/userActions";
 
-const SignupFormContainer = ({ signupUser, authUser, history }) => {
+const SignupFormContainer = ({ signupUser, isAuthenticated, history }) => {
 	const {
 		username,
 		email,
@@ -32,11 +31,11 @@ const SignupFormContainer = ({ signupUser, authUser, history }) => {
 	} = useAuthReducer();
 
 	useEffect(() => {
-		if (!_.isEmpty(authUser)) {
+		if (isAuthenticated) {
 			history.push("/");
 		}
 		// eslint-disable-next-line
-	}, [authUser]);
+	}, [isAuthenticated]);
 
 	const onSubmit = async () => {
 		const formData = { username, email, password, confirmPassword };
@@ -72,7 +71,7 @@ const SignupFormContainer = ({ signupUser, authUser, history }) => {
 };
 
 const mapStateToProps = (state) => ({
-	authUser: state.user.authUser,
+	isAuthenticated: state.authUser.isAuthenticated,
 });
 const mapActionsToProps = {
 	signupUser,
