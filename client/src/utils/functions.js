@@ -34,6 +34,27 @@ export const validateLoginFormAndReturn = (formData) => {
 	return error;
 };
 
+export const validateSignupFormAndReturn = (formData) => {
+	const { username, email, password, confirmPassword } = formData;
+	let error = {};
+
+	if (isNullOrEmpty(username.trim())) {
+		error.username = "Please provide a username";
+	}
+	if (isNullOrEmpty(email.trim())) {
+		error.email = "Please provide an email";
+	} else if (!isEmail(email)) {
+		error.email = "Please add a valid email";
+	}
+	if (isNullOrEmpty(password.trim())) {
+		error.password = "Please add your password";
+	}
+	if (confirmPassword !== password) {
+		error.confirmPassword = "Passwords must match ";
+	}
+	return error;
+};
+
 //https://github.com/axios/axios#handling-errors
 export const getErrorMessageFromError = (error) => {
 	if (navigator.onLine) {

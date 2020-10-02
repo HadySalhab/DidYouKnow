@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
 	...theme.spreadThis,
@@ -27,7 +28,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const SignupForm = () => {
+const SignupForm = ({
+	username,
+	email,
+	password,
+	confirmPassword,
+	onUsernameChange,
+	onEmailChange,
+	onPasswordChange,
+	onConfirmPasswordChange,
+	loading,
+	error = {},
+	onSubmit,
+}) => {
 	const classes = useStyles();
 	return (
 		<div>
@@ -41,46 +54,90 @@ const SignupForm = () => {
 							</Box>
 							?
 						</Typography>
-						<form noValidate autoComplete="off">
+						<form
+							noValidate
+							autoComplete="off"
+							onSubmit={(e) => {
+								e.preventDefault();
+								onSubmit();
+							}}
+						>
 							<TextField
 								className={classes.textField}
 								fullWidth
 								id="username"
+								name="username"
+								type="text"
 								label="Username"
 								variant="outlined"
+								value={username}
+								error={error.username ? true : false}
+								helperText={error.username}
+								onChange={onUsernameChange}
 							/>
 							<TextField
 								className={classes.textField}
 								fullWidth
 								id="email"
+								name="email"
+								type="email"
 								label="Email Address"
 								variant="outlined"
+								value={email}
+								error={error.email ? true : false}
+								helperText={error.email}
+								onChange={onEmailChange}
 							/>
 							<TextField
 								className={classes.textField}
 								fullWidth
 								id="password"
+								name="password"
+								type="password"
 								label="Password"
 								variant="outlined"
+								error={error.password ? true : false}
+								helperText={error.password}
+								value={password}
+								onChange={onPasswordChange}
 							/>
 							<TextField
 								className={classes.textField}
 								fullWidth
 								id="confirmPassword"
+								name="confirmPassword"
+								type="password"
 								label="Confirm Password"
 								variant="outlined"
+								error={error.confirmPassword ? true : false}
+								helperText={error.confirmPassword}
+								value={confirmPassword}
+								onChange={onConfirmPasswordChange}
 							/>
 							<Box my="1rem">
 								<Button
 									type="submit"
 									variant="contained"
 									color="secondary"
+									disabled={loading}
 									className={classes.formSubmit}
 									fullWidth
 								>
-									SignUp
+									Signup
+									{loading && (
+										<CircularProgress
+											color="secondary"
+											size={30}
+											className={classes.progress}
+										/>
+									)}
 								</Button>
 							</Box>
+							{error.signupError && (
+								<Typography variant="body2" className={classes.authError}>
+									{error.signupError}
+								</Typography>
+							)}
 						</form>
 					</Box>
 				</Paper>

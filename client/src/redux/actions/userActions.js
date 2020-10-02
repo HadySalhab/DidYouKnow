@@ -2,8 +2,14 @@ import axios from "axios";
 import { GET_AUTHENTICATED_USER_DETAILS } from "../types";
 import { LOCALSTORAGE_TOKEN_KEY } from "../../utils/constants";
 
-export const loginUser = (userData) => async (dispatch) => {
-	const response = await axios.post("/auth/login", userData);
+export const loginUser = (loginFormData) => async (dispatch) => {
+	const response = await axios.post("/auth/login", loginFormData);
+	setAuthorizationHeader(response.data.data);
+	await dispatch(getAuthenticatedUserDetails());
+};
+
+export const signupUser = (signupFormData) => async (dispatch) => {
+	const response = await axios.post("/auth/signup", signupFormData);
 	setAuthorizationHeader(response.data.data);
 	await dispatch(getAuthenticatedUserDetails());
 };

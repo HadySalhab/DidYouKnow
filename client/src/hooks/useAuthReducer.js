@@ -20,7 +20,7 @@ function authReducer(state, action) {
 		case "SET_PASSWORD":
 			return { ...state, password: action.payload };
 		case "SET_CONFIRM_PASSWORD":
-			return { ...state, passwordConfirm: action.payload };
+			return { ...state, confirmPassword: action.payload };
 		case "LOADING":
 			return { ...state, loading: true, error: "" };
 		case "ERROR":
@@ -53,10 +53,10 @@ const useAuthReducer = () => {
 			payload: password,
 		});
 	});
-	const setPasswordConfirm = useInputSetter((passwordConfirm) => {
+	const setConfirmPassword = useInputSetter((confirmPassword) => {
 		dispatch({
-			type: "SET_PASSWORD_CONFIRM",
-			payload: passwordConfirm,
+			type: "SET_CONFIRM_PASSWORD",
+			payload: confirmPassword,
 		});
 	});
 	const setLoading = () => dispatch({ type: "LOADING" });
@@ -68,7 +68,7 @@ const useAuthReducer = () => {
 		setUsername,
 		setEmail,
 		setPassword,
-		setPasswordConfirm,
+		setConfirmPassword,
 		setLoading,
 		setError,
 		setReset,

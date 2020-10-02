@@ -32,7 +32,7 @@ const LoginForm = ({
 	email,
 	password,
 	loading,
-	error,
+	error = {},
 	onEmailChange,
 	onPasswordChange,
 	onSubmit,

@@ -8,7 +8,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 // Image
 import landingImage from "../assets/landing-image.png";
 
-import SignupForm from "../components/SignupForm";
+// Component
+import SignupFormContainer from "../components/SignupFormContainer";
 
 const useStyles = makeStyles((theme) => ({
 	...theme.spreadThis,
@@ -40,7 +41,7 @@ const SignupPage = () => {
 			</Grid>
 
 			<Grid item xs={12} md={6}>
-				<SignupForm />
+				<SignupFormContainer />
 			</Grid>
 		</Grid>
 	);
