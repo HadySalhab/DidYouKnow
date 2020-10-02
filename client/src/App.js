@@ -13,12 +13,16 @@ import LandingPage from "./pages/LandingPage";
 // Utils
 import themeObject from "./utils/theme";
 
+// Redux
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 const theme = createMuiTheme(themeObject);
 
 function App() {
 	return (
 		<MuiThemeProvider theme={theme}>
-			<div className="App">
+			<Provider store={store}>
 				<BrowserRouter>
 					<Container maxWidth="md">
 						<Switch>
@@ -26,7 +30,7 @@ function App() {
 						</Switch>
 					</Container>
 				</BrowserRouter>
-			</div>
+			</Provider>
 		</MuiThemeProvider>
 	);
 }
