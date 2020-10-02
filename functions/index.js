@@ -87,3 +87,37 @@ exports.createNotificationOnComment = functions
 			console.log(error);
 		}
 	});
+
+exports.onFactDelete = functions
+	.region("australia-southeast1")
+	.firestore.document("facts/{id}")
+	.onDelete(async (factDocSnapshot, context) => {
+		try {
+			const factId = context.params.id;
+			const batch = db.batch();
+			const commentsDocQuerySnapshot = await db
+				.collection("comments")
+				.where("fact", "==", factId)
+				.get();
+			commentsDocQuerySnapshot.forEach((commentDoc) => {
+				batch.delete(commentDoc.ref);
+			});
+			const likesDocQuerySnapshot = await db
+				.collection("likes")
+				.where("fact", "==", factId)
+				.get();
+			likesDocQuerySnapshot.forEach((likeDoc) => {
+				batch.delete(likeDoc.ref);
+			});
+			const notificationsDocQuerySnapshot = await db
+				.collection("notifications")
+				.where("fact", "==", factId)
+				.get();
+			notificationsDocQuerySnapshot.forEach((notificationDoc) => {
+				batch.delete(notificationDoc.ref);
+			});
+			await batch.commit();
+		} catch (error) {
+			console.log(error);
+		}
+	});
