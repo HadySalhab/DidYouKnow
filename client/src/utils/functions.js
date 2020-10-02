@@ -33,3 +33,23 @@ export const validateLoginFormAndReturn = (formData) => {
 	}
 	return error;
 };
+
+//https://github.com/axios/axios#handling-errors
+export const getErrorMessageFromError = (error) => {
+	if (navigator.onLine) {
+		if (error.response) {
+			if (!error.response.data.message) {
+				return error.response.statusText;
+			}
+			return error.response.data.message;
+		} else if (error.request) {
+			return `Something Went Wrong. Please Try Again!`;
+		} else if (error.message) {
+			return `Error: ${error.message}`;
+		} else {
+			return "Unknown Error.";
+		}
+	} else {
+		return "Please check network connection";
+	}
+};

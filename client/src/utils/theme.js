@@ -25,5 +25,10 @@ export default {
 		progress: {
 			position: "absolute",
 		},
+		authError: {
+			color: "red",
+			fontSize: "0.8rem",
+			marginTop: 10,
+		},
 	},
 };

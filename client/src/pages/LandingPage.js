@@ -1,53 +1,35 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, Switch } from "react-router-dom";
 
-// MUI
-import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import SignupPage from "./SignupPage";
 
-// Page
-import SignupForm from "../components/SignupForm";
-import LoginContainer from "../components/LoginContainer";
-// Image
-import landingImage from "../assets/landing-image.png";
+import { connect } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-	...theme.spreadThis,
-	image: {
-		width: "100%",
-		height: "100%",
-	},
-}));
+// Util
+import _ from "lodash";
 
-const LandingPage = () => {
-	const classes = useStyles();
+const LandingPage = ({ user, history }) => {
+	const getMainPage = (routerProps) => {
+		if (_.isEmpty(user)) {
+			return <SignupPage {...routerProps} />;
+		} else {
+			return <h1>authenticated</h1>;
+		}
+	};
+
 	return (
-		<Grid
-			container
-			spacing={0}
-			alignItems="center"
-			justify="center"
-			style={{ minHeight: "100vh" }}
-		>
-			<Grid item xs={0} md={6}>
-				<Hidden only={["xs", "sm"]}>
-					<img
-						alt="Question Mark"
-						className={classes.image}
-						src={landingImage}
-					/>
-				</Hidden>
-			</Grid>
-
-			<Grid item xs={12} md={6}>
-				<Switch>
-					<Route exact path="/" component={SignupForm} />
-					<Route exact path="/login" component={LoginContainer} />
-				</Switch>
-			</Grid>
-		</Grid>
+		<Switch>
+			<Route
+				exact
+				path="/"
+				render={(routerProps) => getMainPage(routerProps)}
+			/>
+		</Switch>
 	);
 };
 
-export default LandingPage;
+const mapStateToProps = (state) => ({
+	user: state.user,
+});
+
+export default connect(mapStateToProps, null)(LandingPage);

@@ -104,6 +104,11 @@ const LoginForm = ({
 									)}
 								</Button>
 							</Box>
+							{error.loginError && (
+								<Typography variant="body2" className={classes.authError}>
+									{error.loginError}
+								</Typography>
+							)}
 						</form>
 					</Box>
 				</Paper>
