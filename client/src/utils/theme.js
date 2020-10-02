@@ -22,5 +22,8 @@ export default {
 		formSubmit: {
 			textAlign: "center",
 		},
+		progress: {
+			position: "absolute",
+		},
 	},
 };

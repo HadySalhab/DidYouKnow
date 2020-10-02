@@ -8,7 +8,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 // Page
 import SignupForm from "../components/SignupForm";
-import LoginForm from "../components/LoginForm";
+import LoginContainer from "../components/LoginContainer";
 // Image
 import landingImage from "../assets/landing-image.png";
 
@@ -43,7 +43,7 @@ const LandingPage = () => {
 			<Grid item xs={12} md={6}>
 				<Switch>
 					<Route exact path="/" component={SignupForm} />
-					<Route exact path="/login" component={LoginForm} />
+					<Route exact path="/login" component={LoginContainer} />
 				</Switch>
 			</Grid>
 		</Grid>

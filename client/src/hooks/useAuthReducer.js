@@ -74,3 +74,4 @@ const useAuthReducer = () => {
 		setReset,
 	};
 };
+export default useAuthReducer;
