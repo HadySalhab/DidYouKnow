@@ -9,7 +9,7 @@ import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 // Pages
-import LandingPage from "./pages/LandingPage";
+import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import BrandPage from "./pages/BrandPage";
 import ErrorPage from "./pages/ErrorPage";
@@ -95,7 +95,7 @@ function App({
 				<BrowserRouter>
 					<Container maxWidth="md">
 						<Switch>
-							<Route exact path="/" component={LandingPage} />
+							<Route exact path="/" component={MainPage} />
 							<Route exact path="/login" component={LoginPage} />
 						</Switch>
 					</Container>

@@ -5,9 +5,12 @@ import { Route, Switch } from "react-router-dom";
 import SignupPage from "./SignupPage";
 import DataPage from "./DataPage";
 
+// Components
+import Navbar from "../components/Navbar";
+
 import { connect } from "react-redux";
 
-const LandingPage = ({ isAuthenticated, history }) => {
+const MainPage = ({ isAuthenticated, history }) => {
 	const getMainPage = (routerProps) => {
 		if (isAuthenticated) {
 			return <DataPage {...routerProps} />;
@@ -18,6 +21,7 @@ const LandingPage = ({ isAuthenticated, history }) => {
 
 	return (
 		<Switch>
+			{isAuthenticated && <Navbar />}
 			<Route
 				exact
 				path="/"
@@ -31,4 +35,4 @@ const mapStateToProps = (state) => ({
 	isAuthenticated: state.authUser.isAuthenticated,
 });
 
-export default connect(mapStateToProps, null)(LandingPage);
+export default connect(mapStateToProps, null)(MainPage);
