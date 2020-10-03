@@ -10,8 +10,8 @@ import Navbar from "../components/Navbar";
 
 import { connect } from "react-redux";
 
-const MainPage = ({ isAuthenticated, history }) => {
-	const getMainPage = (routerProps) => {
+const HomePage = ({ isAuthenticated, history }) => {
+	const getHomePage = (routerProps) => {
 		if (isAuthenticated) {
 			return <DataPage {...routerProps} />;
 		} else {
@@ -25,7 +25,7 @@ const MainPage = ({ isAuthenticated, history }) => {
 			<Route
 				exact
 				path="/"
-				render={(routerProps) => getMainPage(routerProps)}
+				render={(routerProps) => getHomePage(routerProps)}
 			/>
 		</Switch>
 	);
@@ -35,4 +35,4 @@ const mapStateToProps = (state) => ({
 	isAuthenticated: state.authUser.isAuthenticated,
 });
 
-export default connect(mapStateToProps, null)(MainPage);
+export default connect(mapStateToProps, null)(HomePage);
