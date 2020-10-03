@@ -1,12 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // Page
 import SignupPage from "./SignupPage";
 import DataPage from "./DataPage";
-
-// Components
-import Navbar from "../components/Navbar";
 
 import { connect } from "react-redux";
 
@@ -20,14 +17,15 @@ const HomePage = ({ isAuthenticated, history }) => {
 	};
 
 	return (
-		<Switch>
-			{isAuthenticated && <Navbar />}
-			<Route
-				exact
-				path="/"
-				render={(routerProps) => getHomePage(routerProps)}
-			/>
-		</Switch>
+		<Fragment>
+			<Switch>
+				<Route
+					exact
+					path="/"
+					render={(routerProps) => getHomePage(routerProps)}
+				/>
+			</Switch>
+		</Fragment>
 	);
 };
 

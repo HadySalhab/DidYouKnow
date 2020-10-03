@@ -16,6 +16,9 @@ export default {
 	},
 	// https://stackoverflow.com/questions/56897838/getting-a-error-typeerror-color-charat-is-not-a-function-in-c-node-modul
 	spreadThis: {
+		appBar: {
+			backgroundColor: "#fff",
+		},
 		textField: {
 			margin: "10px auto",
 		},

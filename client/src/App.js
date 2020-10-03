@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -7,6 +7,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+
+// Components
+import Navbar from "./components/Navbar";
 
 // Pages
 import HomePage from "./pages/HomePage";
@@ -92,14 +95,17 @@ function App({
 			return <ErrorPage />;
 		} else {
 			return (
-				<BrowserRouter>
-					<Container maxWidth="md">
-						<Switch>
-							<Route exact path="/" component={HomePage} />
-							<Route exact path="/login" component={LoginPage} />
-						</Switch>
-					</Container>
-				</BrowserRouter>
+				<Fragment>
+					{authUser.isAuthenticated && <Navbar />}
+					<BrowserRouter>
+						<Container maxWidth="md">
+							<Switch>
+								<Route exact path="/" component={HomePage} />
+								<Route exact path="/login" component={LoginPage} />
+							</Switch>
+						</Container>
+					</BrowserRouter>
+				</Fragment>
 			);
 		}
 	};
