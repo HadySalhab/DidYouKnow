@@ -18,6 +18,7 @@ export default {
 	spreadThis: {
 		appBar: {
 			backgroundColor: "#fff",
+			marginBottom: "1rem",
 		},
 		textField: {
 			margin: "10px auto",

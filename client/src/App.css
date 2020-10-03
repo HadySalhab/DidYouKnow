@@ -31,3 +31,7 @@ a {
 .secondary-txt-color {
 	color: var(--secondary-txt-color) !important;
 }
+
+.w-full {
+	width: 100% !important;
+}
