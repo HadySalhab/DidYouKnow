@@ -1,14 +1,16 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+// Page
 import SignupPage from "./SignupPage";
+import DataPage from "./DataPage";
 
 import { connect } from "react-redux";
 
 const LandingPage = ({ isAuthenticated, history }) => {
 	const getMainPage = (routerProps) => {
 		if (isAuthenticated) {
-			return <h1>authenticated</h1>;
+			return <DataPage {...routerProps} />;
 		} else {
 			return <SignupPage {...routerProps} />;
 		}
