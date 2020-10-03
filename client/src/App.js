@@ -58,6 +58,7 @@ function App({
 			if (decodedToken.exp * 1000 < Date.now()) {
 				logoutUser();
 				window.location.href = "/login";
+				// setUserAuthenticated();
 			} else {
 				setUserAuthenticated();
 				axios.defaults.headers.common["Authorization"] = token;
@@ -81,6 +82,7 @@ function App({
 			}
 		};
 		if (authUser.isAuthenticated) {
+			//fetchAuthUserDetails();
 			fetchAuthUserDetails();
 		}
 

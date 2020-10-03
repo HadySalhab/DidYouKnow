@@ -5,7 +5,9 @@ import {
 } from "../types";
 const initialState = {
 	isAuthenticated: false,
-	authUserData: {},
+	authUserData: {
+		// email: "hadysalhab1@gmail.com",
+	},
 };
 const authUserReducer = (state = initialState, action) => {
 	switch (action.type) {
