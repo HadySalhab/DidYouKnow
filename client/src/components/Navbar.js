@@ -129,9 +129,9 @@ export default function PrimarySearchAppBar() {
 
 	return (
 		<div className={classes.grow}>
-			<AppBar position="static" className={classes.appBar}>
+			<AppBar variant="outlined" position="static" className={classes.appBar}>
 				<Toolbar>
-					<Container>
+					<Container maxWidth="md">
 						<Box
 							className="w-full"
 							display="flex"
