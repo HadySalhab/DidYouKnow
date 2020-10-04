@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const FactListItem = () => {
+const FactListItem = ({ fact }) => {
 	const classes = useStyles();
 	return (
 		<Card className={classes.fact} variant="outlined" square="true">
@@ -41,25 +41,32 @@ const FactListItem = () => {
 						<Box mb={1}>
 							<Box display="flex">
 								<Typography variant="subtitle2" component="p">
-									What is the longest recorded flight of a chicken ?
+									{fact.username.username}
 								</Typography>
 								<Typography
 									variant="outline"
 									component="p"
 									className={classes.date}
 								>
-									5 days ago.
+									{fact.createdAt}
+								</Typography>
+							</Box>
+						</Box>
+						<Box mb={1}>
+							<Box display="flex">
+								<Typography variant="subtitle2" component="p">
+									{fact.question}
 								</Typography>
 							</Box>
 							<Typography variant="body2" component="p">
-								13 seconds
+								{fact.answer}
 							</Typography>
 						</Box>
 						{/*  */}
 						<Box display="flex">
 							<Box>
 								<Typography variant="body2" component="span">
-									10
+									{fact.likeCount}
 								</Typography>
 								<IconButton className={classes.iconButton}>
 									<FavoriteIcon />
@@ -68,7 +75,7 @@ const FactListItem = () => {
 
 							<Box ml={1}>
 								<Typography variant="body2" component="span">
-									10
+									{fact.commentCount}
 								</Typography>
 								<IconButton className={classes.iconButton}>
 									<ChatIcon />

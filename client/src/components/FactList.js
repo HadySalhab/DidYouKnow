@@ -27,7 +27,7 @@ const FactList = ({ facts, loading, error }) => {
 			{facts &&
 				facts.map((fact) => (
 					<Box mb={1}>
-						<FactListItem />
+						<FactListItem fact={fact} />
 					</Box>
 				))}
 		</div>
