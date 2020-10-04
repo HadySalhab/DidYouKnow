@@ -1,4 +1,7 @@
 import React from "react";
+// Redux
+import { logoutUser } from "../redux/actions/userActions";
+import { connect } from "react-redux";
 
 // MUI
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -47,13 +50,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function PrimarySearchAppBar() {
+function PrimarySearchAppBar({ logoutUser }) {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+	const handleSignout = () => {
+		logoutUser();
+
+		handleMenuClose();
+	};
 
 	const handleProfileMenuOpen = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -84,7 +93,7 @@ export default function PrimarySearchAppBar() {
 			onClose={handleMenuClose}
 		>
 			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Sign out</MenuItem>
+			<MenuItem onClick={handleSignout}>Logout</MenuItem>
 		</Menu>
 	);
 
@@ -190,3 +199,7 @@ export default function PrimarySearchAppBar() {
 		</div>
 	);
 }
+const mapActionsToProps = {
+	logoutUser,
+};
+export default connect(null, mapActionsToProps)(PrimarySearchAppBar);

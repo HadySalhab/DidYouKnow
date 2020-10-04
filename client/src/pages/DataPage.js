@@ -23,7 +23,7 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 			history.push("/");
 		}
 		// eslint-disable-next-line
-	}, []);
+	}, [authUser.isAuthenticated]);
 
 	const render = () => {
 		if (!_.isEmpty(authUser.authUserData)) {
