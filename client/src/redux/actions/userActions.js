@@ -31,10 +31,12 @@ export const getAuthenticatedUserDetails = () => async (dispatch) => {
 	});
 	try {
 		const response = await axios.get("/users/me/details");
-		dispatch({
-			type: GET_AUTHENTICATED_USER_DETAILS,
-			payload: response.data.data,
-		});
+		setTimeout(() => {
+			dispatch({
+				type: GET_AUTHENTICATED_USER_DETAILS,
+				payload: response.data.data,
+			});
+		}, [1000]);
 	} catch (error) {
 		dispatch({
 			type: GET_AUTHENTICATED_USER_DETAILS_ERROR,
