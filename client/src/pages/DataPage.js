@@ -9,7 +9,7 @@ import Hidden from "@material-ui/core/Hidden";
 import _ from "lodash";
 
 // Component
-import FactListContainer from "../components/FactListContainer";
+import AllFactsContainer from "../components/AllFactsContainer";
 
 // Redux
 import { connect } from "react-redux";
@@ -31,7 +31,7 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 				<Grid container spacing={4}>
 					<Grid item xs={12} md={8}>
 						<Switch>
-							<Route exact path="/" component={FactListContainer} />
+							<Route exact path="/" component={AllFactsContainer} />
 							<Route
 								exact
 								path="/facts/:factId"
