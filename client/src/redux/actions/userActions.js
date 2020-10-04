@@ -3,7 +3,10 @@ import {
 	GET_AUTHENTICATED_USER_DETAILS,
 	SET_USER_AUTHENTICATED,
 	SET_USER_UNAUTHENTICATED,
+	GET_AUTHENTICATED_USER_DETAILS_LOADING,
+	GET_AUTHENTICATED_USER_DETAILS_ERROR,
 } from "../types";
+import { getErrorMessageFromError } from "../../utils/functions";
 import { LOCALSTORAGE_TOKEN_KEY } from "../../utils/constants";
 
 export const loginUser = (loginFormData) => async (dispatch) => {
@@ -23,11 +26,21 @@ export const signupUser = (signupFormData) => async (dispatch) => {
 };
 
 export const getAuthenticatedUserDetails = () => async (dispatch) => {
-	const response = await axios.get("/users/me/details");
 	dispatch({
-		type: GET_AUTHENTICATED_USER_DETAILS,
-		payload: response.data.data,
+		type: GET_AUTHENTICATED_USER_DETAILS_LOADING,
 	});
+	try {
+		const response = await axios.get("/users/me/details");
+		dispatch({
+			type: GET_AUTHENTICATED_USER_DETAILS,
+			payload: response.data.data,
+		});
+	} catch (error) {
+		dispatch({
+			type: GET_AUTHENTICATED_USER_DETAILS_ERROR,
+			payload: getErrorMessageFromError(error),
+		});
+	}
 };
 
 export const logoutUser = () => (dispatch) => {

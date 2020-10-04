@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -16,6 +16,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import BrandPage from "./pages/BrandPage";
 import ErrorPage from "./pages/ErrorPage";
+import NotFound from "./pages/NotFound";
 
 // Utils
 import themeObject from "./utils/theme";
@@ -26,103 +27,60 @@ import {
 	NETWORK_TIME_OUT,
 	LOCALSTORAGE_TOKEN_KEY,
 } from "./utils/constants";
-import { getErrorMessageFromError } from "./utils/functions";
+import _ from "lodash";
 
 // Redux
 import { connect } from "react-redux";
-import {
-	logoutUser,
-	getAuthenticatedUserDetails,
-	setUserAuthenticated,
-} from "./redux/actions/userActions";
+import { logoutUser, setUserAuthenticated } from "./redux/actions/userActions";
+import store from "./redux/store";
 
 const theme = createMuiTheme(themeObject);
 axios.defaults.timeout = NETWORK_TIME_OUT;
 axios.defaults.baseURL = API_BASE_URL;
 
-function App({
-	authUser,
-	logoutUser,
-	getAuthenticatedUserDetails,
-	setUserAuthenticated,
-}) {
-	const [isGettingUserDetailsLoading, setGettingUserDetailsLoading] = useState(
-		false
+const token = localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
+if (token) {
+	const decodedToken = jwtDecode(token);
+	if (decodedToken.exp * 1000 < Date.now()) {
+		store.dispatch(logoutUser());
+		window.location.href = "/login";
+		// setUserAuthenticated();
+	} else {
+		store.dispatch(setUserAuthenticated());
+		axios.defaults.headers.common["Authorization"] = token;
+	}
+}
+
+function App({ authUser, ui }) {
+	const shouldRenderNavbar = () =>
+		authUser.isAuthenticated && !_.isEmpty(authUser.authUserData);
+	return (
+		<MuiThemeProvider theme={theme}>
+			<Fragment>
+				{ui.loading && <BrandPage />}
+				{ui.error && <ErrorPage />}
+				{shouldRenderNavbar() && <Navbar />}
+				<BrowserRouter>
+					<Container maxWidth="md">
+						<Switch>
+							<Route
+								exact
+								path={["/", "/facts/:factId", "/profile/:username"]}
+								component={HomePage}
+							/>
+							<Route exact path="/login" component={LoginPage} />
+							<Route component={NotFound} />
+						</Switch>
+					</Container>
+				</BrowserRouter>
+			</Fragment>
+		</MuiThemeProvider>
 	);
-	const [gettinUserDetailsError, setGettingUserDetailsError] = useState(null);
-
-	useEffect(() => {
-		const token = localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
-		if (token) {
-			const decodedToken = jwtDecode(token);
-			if (decodedToken.exp * 1000 < Date.now()) {
-				logoutUser();
-				window.location.href = "/login";
-				// setUserAuthenticated();
-			} else {
-				setUserAuthenticated();
-				axios.defaults.headers.common["Authorization"] = token;
-			}
-		}
-		// eslint-disable-next-line
-	}, []);
-
-	useEffect(() => {
-		const fetchAuthUserDetails = async () => {
-			setGettingUserDetailsError(null);
-			setGettingUserDetailsLoading(true);
-			try {
-				await getAuthenticatedUserDetails();
-				setTimeout(() => {
-					setGettingUserDetailsLoading(false);
-				}, [1000]);
-			} catch (error) {
-				setGettingUserDetailsLoading(false);
-				setGettingUserDetailsError(getErrorMessageFromError(error));
-			}
-		};
-		if (authUser.isAuthenticated) {
-			//fetchAuthUserDetails();
-			fetchAuthUserDetails();
-		}
-
-		// eslint-disable-next-line
-	}, [authUser.isAuthenticated]);
-
-	const render = () => {
-		if (isGettingUserDetailsLoading) {
-			return <BrandPage />;
-		}
-		if (gettinUserDetailsError) {
-			return <ErrorPage />;
-		} else {
-			return (
-				<Fragment>
-					{authUser.isAuthenticated && <Navbar />}
-					<BrowserRouter>
-						<Container maxWidth="md">
-							<Switch>
-								<Route exact path="/" component={HomePage} />
-								<Route exact path="/login" component={LoginPage} />
-							</Switch>
-						</Container>
-					</BrowserRouter>
-				</Fragment>
-			);
-		}
-	};
-
-	return <MuiThemeProvider theme={theme}>{render()}</MuiThemeProvider>;
 }
 
 const mapStateToProps = (state) => ({
 	authUser: state.authUser,
+	ui: state.ui,
 });
 
-const mapActionsToProps = {
-	logoutUser,
-	getAuthenticatedUserDetails,
-	setUserAuthenticated,
-};
-
-export default connect(mapStateToProps, mapActionsToProps)(App);
+export default connect(mapStateToProps, null)(App);

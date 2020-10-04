@@ -8,11 +8,16 @@ import DataPage from "./DataPage";
 import { connect } from "react-redux";
 
 const HomePage = ({ isAuthenticated, history }) => {
-	const getHomePage = (routerProps) => {
-		if (isAuthenticated) {
-			return <DataPage {...routerProps} />;
+	const getComponent = (routerProps) => {
+		if (routerProps.location.pathname === "/") {
+			if (isAuthenticated) {
+				return <DataPage {...routerProps} />;
+			} else {
+				return <SignupPage {...routerProps} />;
+			}
 		} else {
-			return <SignupPage {...routerProps} />;
+			console.log("///");
+			return <DataPage {...routerProps} />;
 		}
 	};
 
@@ -21,8 +26,8 @@ const HomePage = ({ isAuthenticated, history }) => {
 			<Switch>
 				<Route
 					exact
-					path="/"
-					render={(routerProps) => getHomePage(routerProps)}
+					path={["/", "/facts/:factId", "/profile/:username"]}
+					render={(routerProps) => getComponent(routerProps)}
 				/>
 			</Switch>
 		</Fragment>
