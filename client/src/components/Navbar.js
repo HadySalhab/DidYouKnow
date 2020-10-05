@@ -64,6 +64,7 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 		logoutUser();
 		handleMenuClose();
 	};
+
 	const handleProfile = () => {
 		history.push(`/profile/${authUser.authUserData.username}`);
 		handleMenuClose();
@@ -97,7 +98,7 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+			<MenuItem onClick={handleProfile}>Profile</MenuItem>
 			<MenuItem onClick={handleSignout}>Logout</MenuItem>
 		</Menu>
 	);
@@ -127,7 +128,7 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 				</IconButton>
 				<p>Notifications</p>
 			</MenuItem>
-			<MenuItem onClick={handleProfile}>
+			<MenuItem onClick={handleProfileMenuOpen}>
 				<IconButton
 					aria-label="account of current user"
 					aria-controls="primary-search-account-menu"
@@ -139,7 +140,7 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 						alt={authUser.authUserData.username}
 					/>
 				</IconButton>
-				<p>Profile</p>
+				<p>{authUser.authUserData.username}</p>
 			</MenuItem>
 		</Menu>
 	);
@@ -181,7 +182,7 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 									aria-label="account of current user"
 									aria-controls={menuId}
 									aria-haspopup="true"
-									onClick={handleProfile}
+									onClick={handleProfileMenuOpen}
 									color="primary"
 								>
 									<Avatar
