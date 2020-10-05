@@ -10,7 +10,7 @@ import { getErrorMessageFromError } from "../utils/functions";
 import { getAllFacts } from "../redux/actions/factsActions";
 import { connect } from "react-redux";
 
-const AllFactsContainer = ({ getAllFacts, allFacts }) => {
+const AllFactsContainer = ({ getAllFacts, allFacts, history }) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	useEffect(() => {
@@ -29,8 +29,9 @@ const AllFactsContainer = ({ getAllFacts, allFacts }) => {
 			fetchAllFacts();
 		}
 	}, []);
+
 	const onFactClick = (fact) => {
-		console.log(fact);
+		history.push(`/facts/${fact.id}`);
 	};
 
 	return (

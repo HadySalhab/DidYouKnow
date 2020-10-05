@@ -21,6 +21,7 @@ const ProfileFactsContainer = ({
 	clearProfile,
 	showAuthenticatedUserProfile,
 	match,
+	history,
 }) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
@@ -48,7 +49,7 @@ const ProfileFactsContainer = ({
 	}, [match.params.username]);
 
 	const onFactClick = (fact) => {
-		console.log(fact);
+		history.push(`/facts/${fact.id}`);
 	};
 
 	return (
