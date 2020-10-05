@@ -2,6 +2,7 @@ import {
 	GET_AUTHENTICATED_USER_DETAILS,
 	SET_USER_AUTHENTICATED,
 	SET_USER_UNAUTHENTICATED,
+	UPLOAD_IMAGE,
 } from "../types";
 const initialState = {
 	isAuthenticated: false,
@@ -26,6 +27,14 @@ const authUserReducer = (state = initialState, action) => {
 		}
 		case SET_USER_UNAUTHENTICATED:
 			return initialState;
+		case UPLOAD_IMAGE:
+			return {
+				...state,
+				authUserData: {
+					...state.authUserData,
+					imageUrl: action.payload.imageUrl,
+				},
+			};
 		default:
 			return state;
 	}

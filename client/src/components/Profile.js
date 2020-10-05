@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useRef } from "react";
 import { Link } from "react-router-dom";
 
 // MUI
@@ -25,9 +25,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Profile = ({ user }) => {
+const Profile = ({ user, withEdit, onImageChange, onEditImageClick }) => {
 	const { imageUrl, website, location, bio, username, createdAt } = user;
 	const classes = useStyles();
+	const fileInput = useRef();
+
 	dayjs.extend(relativeTime);
 
 	return (
@@ -36,10 +38,23 @@ const Profile = ({ user }) => {
 				<div className={classes.profile}>
 					<div className="image-wrapper">
 						<img src={imageUrl} alt="profile" className="profile-image" />
-						<input type="file" id="imageInput" hidden="hidden" />
-						<IconButton tip="Edit profile picture" btnClassName="button">
-							<EditIcon color="primary" />
-						</IconButton>
+						{withEdit && (
+							<Fragment>
+								<input
+									accept="image/gif, image/jpeg, image/png"
+									ref={fileInput}
+									type="file"
+									hidden="hidden"
+									onChange={onImageChange}
+								/>
+								<IconButton
+									tip="Edit profile picture"
+									onClick={() => onEditImageClick(fileInput.current)}
+								>
+									<EditIcon color="primary" />
+								</IconButton>
+							</Fragment>
+						)}
 					</div>
 					<hr />
 					<div className="profile-details">
