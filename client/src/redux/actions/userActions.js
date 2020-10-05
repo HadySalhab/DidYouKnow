@@ -8,9 +8,12 @@ import {
 	GET_AUTHENTICATED_USER_DETAILS_ERROR,
 	GET_PROFILE_FACTS,
 	GET_PROFILE,
+	CLEAR_PROFILE,
+	CLEAR_PROFILE_FACTS,
 } from "../types";
 import { getErrorMessageFromError } from "../../utils/functions";
 import { LOCALSTORAGE_TOKEN_KEY } from "../../utils/constants";
+import store from "../store";
 
 export const loginUser = (loginFormData) => async (dispatch) => {
 	const response = await axios.post("/auth/login", loginFormData);
@@ -34,12 +37,10 @@ export const getAuthenticatedUserDetails = () => async (dispatch) => {
 	});
 	try {
 		const response = await axios.get("/users/me/details");
-		setTimeout(() => {
-			dispatch({
-				type: GET_AUTHENTICATED_USER_DETAILS,
-				payload: response.data.data,
-			});
-		}, [1000]);
+		dispatch({
+			type: GET_AUTHENTICATED_USER_DETAILS,
+			payload: response.data.data,
+		});
 	} catch (error) {
 		dispatch({
 			type: GET_AUTHENTICATED_USER_DETAILS_ERROR,
@@ -74,7 +75,26 @@ export const getProfile = (username) => async (dispatch) => {
 		})),
 	});
 };
-
+export const showAuthenticatedUserProfile = () => (dispatch) => {
+	const authUser = store.getState().authUser;
+	const profile = _.omit(authUser.authUserData, ["facts,notifications,likes"]);
+	const { facts } = _.pick(authUser.authUserData, ["facts"]);
+	dispatch({
+		type: GET_PROFILE_FACTS,
+		payload: facts.map((fact) => ({
+			...fact,
+			username: profile,
+		})),
+	});
+};
+export const clearProfile = () => (dispatch) => {
+	dispatch({
+		type: CLEAR_PROFILE,
+	});
+	dispatch({
+		type: CLEAR_PROFILE_FACTS,
+	});
+};
 const setAuthorizationHeader = (token) => {
 	const DYKtoken = `Bearer ${token}`;
 	localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, DYKtoken);

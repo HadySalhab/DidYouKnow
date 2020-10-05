@@ -7,10 +7,21 @@ import FactList from "./FactList";
 import { getErrorMessageFromError } from "../utils/functions";
 
 // Redux
-import { getProfile } from "../redux/actions/userActions";
+import {
+	getProfile,
+	showAuthenticatedUserProfile,
+	clearProfile,
+} from "../redux/actions/userActions";
 import { connect } from "react-redux";
 
-const ProfileFactsContainer = ({ profileFacts, getProfile, match }) => {
+const ProfileFactsContainer = ({
+	authUser,
+	profileFacts,
+	getProfile,
+	clearProfile,
+	showAuthenticatedUserProfile,
+	match,
+}) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
@@ -26,8 +37,15 @@ const ProfileFactsContainer = ({ profileFacts, getProfile, match }) => {
 				setError(getErrorMessageFromError(getProfileError));
 			}
 		};
-		fetchProfile(match.params.username);
-	}, []);
+		if (match.params.username === authUser.authUserData.username) {
+			showAuthenticatedUserProfile();
+		} else {
+			fetchProfile(match.params.username);
+		}
+		return () => {
+			clearProfile();
+		};
+	}, [match.params.username]);
 	return <FactList facts={profileFacts} loading={loading} error={error} />;
 };
 
@@ -37,6 +55,8 @@ const mapStateToProps = (state) => ({
 });
 const mapActionsToProps = {
 	getProfile,
+	showAuthenticatedUserProfile,
+	clearProfile,
 };
 
 export default connect(
