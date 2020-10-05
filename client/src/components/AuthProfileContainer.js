@@ -48,15 +48,15 @@ const AuthProfileContainer = ({ authUser, uploadImage, updateUserDetails }) => {
 			if (!isValidUrl(website)) {
 				submitError.website = "Please add a valid url";
 				setError(submitError);
-			} else {
-				await updateUserDetails({
-					bio,
-					website,
-					location,
-				});
-				closeDialog();
+				return;
 			}
 		}
+		await updateUserDetails({
+			bio,
+			website,
+			location,
+		});
+		closeDialog();
 	};
 
 	return (

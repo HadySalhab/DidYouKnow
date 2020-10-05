@@ -69,9 +69,7 @@ module.exports.updateAuthenticatedUserDetails = asyncHandler(
 	async (request, response, next) => {
 		const requestBody = request.body;
 		const newBody = {};
-		if (!isNullOrEmpty(requestBody.bio.trim())) {
-			newBody.bio = requestBody.bio;
-		}
+		newBody.bio = requestBody.bio || "";
 		if (!isNullOrEmpty(requestBody.website.trim())) {
 			if (isValidUrl(requestBody.website.trim())) {
 				if (requestBody.website.trim().substring(0, 4) !== "http") {
@@ -83,11 +81,9 @@ module.exports.updateAuthenticatedUserDetails = asyncHandler(
 				return next(new ErrorResponse("Please add a valid URL", 400));
 			}
 		} else {
-			return next(new ErrorResponse("Please add a valid URL", 400));
+			newBody.website = requestBody.website || "";
 		}
-		if (!isNullOrEmpty(requestBody.location.trim())) {
-			newBody.location = requestBody.location;
-		}
+		newBody.location = requestBody.location || "";
 		await db.doc(`/users/${request.user.username}`).update(newBody);
 		const userDocSnapshot = await db
 			.doc(`/users/${request.user.username}`)
