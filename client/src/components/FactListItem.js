@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // Util
 import dayjs from "dayjs";
@@ -32,27 +33,39 @@ const useStyles = makeStyles((theme) => ({
 		padding: 0,
 		marginLeft: "5px",
 	},
+	username: {
+		"&:hover": {
+			textDecoration: "underline",
+		},
+	},
 }));
 
 const FactListItem = ({ fact }) => {
 	const classes = useStyles();
 	dayjs.extend(relativeTime);
 	return (
-		<Card className={classes.fact} variant="outlined" square="true">
+		<Card className={classes.fact} variant="outlined">
 			<Box p={2}>
 				<Box display="flex">
-					<Avatar>R</Avatar>
+					<Avatar>
+						<Avatar alt={fact.username.username} src={fact.username.imageUrl} />
+					</Avatar>
 					<Box flexDirection="column" ml={2} flexGrow="1">
 						<Box mb={1}>
 							<Box display="flex">
-								<Typography variant="subtitle2" component="p">
-									{fact.username.username}
-								</Typography>
-								<Typography
-									variant="outline"
-									component="p"
-									className={classes.date}
+								<Link
+									className={classes.username}
+									to={`/profile/${fact.username.username}`}
 								>
+									<Typography
+										color="textPrimary"
+										variant="subtitle2"
+										component="p"
+									>
+										{fact.username.username}
+									</Typography>
+								</Link>
+								<Typography component="p" className={classes.date}>
 									{dayjs(fact.createdAt).fromNow()}
 								</Typography>
 							</Box>
