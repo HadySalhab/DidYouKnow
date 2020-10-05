@@ -130,7 +130,10 @@ function PrimarySearchAppBar({ authUser, logoutUser }) {
 					aria-haspopup="true"
 					color="inherit"
 				>
-					<AccountCircle />
+					<Avatar
+						src={authUser.authUserData.imageUrl}
+						alt={authUser.authUserData.username}
+					/>
 				</IconButton>
 				<p>Profile</p>
 			</MenuItem>
