@@ -16,7 +16,6 @@ const HomePage = ({ isAuthenticated, history }) => {
 				return <SignupPage {...routerProps} />;
 			}
 		} else {
-			console.log("///");
 			return <DataPage {...routerProps} />;
 		}
 	};
