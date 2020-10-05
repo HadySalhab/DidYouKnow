@@ -56,8 +56,8 @@ export default {
 				},
 			},
 			"& .profile-image": {
-				width: 200,
-				height: 200,
+				width: 150,
+				height: 150,
 				objectFit: "cover",
 				maxWidth: "100%",
 				borderRadius: "50%",
