@@ -103,6 +103,7 @@ module.exports.getAuthenticatedUserDetails = asyncHandler(
 	async (request, response, next) => {
 		const likes = [];
 		const notifications = [];
+		const facts = [];
 
 		const userDocSnapshot = await db
 			.doc(`/users/${request.user.username}`)
@@ -133,12 +134,26 @@ module.exports.getAuthenticatedUserDetails = asyncHandler(
 			});
 		});
 
+		const factQuerySnapshot = await db
+			.collection("facts")
+			.where("username", "==", request.user.username)
+			.orderBy("createdAt", "desc")
+			.get();
+
+		factQuerySnapshot.forEach((factDoc) => {
+			facts.push({
+				id: factDoc.id,
+				...factDoc.data(),
+			});
+		});
+
 		return response.status(200).json({
 			success: true,
 			data: {
 				...userDocSnapshot.data(),
 				likes,
 				notifications,
+				facts,
 			},
 		});
 	}
