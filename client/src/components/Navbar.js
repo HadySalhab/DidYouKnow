@@ -148,7 +148,7 @@ function PrimarySearchAppBar({ logoutUser }) {
 							alignItems="center"
 						>
 							<Typography
-								color="textPrimary"
+								color="primary"
 								className={classes.title}
 								variant="h6"
 								noWrap
@@ -157,12 +157,12 @@ function PrimarySearchAppBar({ logoutUser }) {
 							</Typography>
 
 							<div className={classes.sectionDesktop}>
-								<IconButton aria-label="main page" color="textPrimary">
+								<IconButton aria-label="main page" color="primary">
 									<HomeIcon />
 								</IconButton>
 								<IconButton
 									aria-label="show 17 new notifications"
-									color="textPrimary"
+									color="primary"
 								>
 									<Badge badgeContent={17} color="secondary">
 										<NotificationsIcon />
@@ -174,7 +174,7 @@ function PrimarySearchAppBar({ logoutUser }) {
 									aria-controls={menuId}
 									aria-haspopup="true"
 									onClick={handleProfileMenuOpen}
-									color="textPrimary"
+									color="primary"
 								>
 									<AccountCircle />
 								</IconButton>
@@ -185,7 +185,7 @@ function PrimarySearchAppBar({ logoutUser }) {
 									aria-controls={mobileMenuId}
 									aria-haspopup="true"
 									onClick={handleMobileMenuOpen}
-									color="textPrimary"
+									color="primary"
 								>
 									<MoreIcon />
 								</IconButton>
