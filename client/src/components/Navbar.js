@@ -17,6 +17,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Container from "@material-ui/core/Container";
+import Avatar from "@material-ui/core/Avatar";
 import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function PrimarySearchAppBar({ logoutUser }) {
+function PrimarySearchAppBar({ authUser, logoutUser }) {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -176,7 +177,10 @@ function PrimarySearchAppBar({ logoutUser }) {
 									onClick={handleProfileMenuOpen}
 									color="primary"
 								>
-									<AccountCircle />
+									<Avatar
+										src={authUser.authUserData.imageUrl}
+										alt={authUser.authUserData.username}
+									/>
 								</IconButton>
 							</div>
 							<div className={classes.sectionMobile}>
@@ -199,7 +203,10 @@ function PrimarySearchAppBar({ logoutUser }) {
 		</div>
 	);
 }
+const mapStateToProps = (state) => ({
+	authUser: state.authUser,
+});
 const mapActionsToProps = {
 	logoutUser,
 };
-export default connect(null, mapActionsToProps)(PrimarySearchAppBar);
+export default connect(mapStateToProps, mapActionsToProps)(PrimarySearchAppBar);
