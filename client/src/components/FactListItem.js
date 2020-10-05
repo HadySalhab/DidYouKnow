@@ -1,5 +1,9 @@
 import React from "react";
 
+// Util
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
 // MUI
 import Box from "@material-ui/core/Box";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -32,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FactListItem = ({ fact }) => {
 	const classes = useStyles();
+	dayjs.extend(relativeTime);
 	return (
 		<Card className={classes.fact} variant="outlined" square="true">
 			<Box p={2}>
@@ -48,7 +53,7 @@ const FactListItem = ({ fact }) => {
 									component="p"
 									className={classes.date}
 								>
-									{fact.createdAt}
+									{dayjs(fact.createdAt).fromNow()}
 								</Typography>
 							</Box>
 						</Box>
