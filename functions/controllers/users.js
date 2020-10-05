@@ -74,10 +74,16 @@ module.exports.updateAuthenticatedUserDetails = asyncHandler(
 		}
 		if (!isNullOrEmpty(requestBody.website.trim())) {
 			if (isValidUrl(requestBody.website.trim())) {
-				newBody.website = requestBody.website;
+				if (requestBody.website.trim().substring(0, 4) !== "http") {
+					newBody.website = `http://${requestBody.website.trim()}`;
+				} else {
+					newBody.website = requestBody.website;
+				}
 			} else {
 				return next(new ErrorResponse("Please add a valid URL", 400));
 			}
+		} else {
+			return next(new ErrorResponse("Please add a valid URL", 400));
 		}
 		if (!isNullOrEmpty(requestBody.location.trim())) {
 			newBody.location = requestBody.location;
