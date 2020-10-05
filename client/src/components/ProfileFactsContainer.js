@@ -46,7 +46,19 @@ const ProfileFactsContainer = ({
 			clearProfile();
 		};
 	}, [match.params.username]);
-	return <FactList facts={profileFacts} loading={loading} error={error} />;
+
+	const onFactClick = (fact) => {
+		console.log(fact);
+	};
+
+	return (
+		<FactList
+			facts={profileFacts}
+			loading={loading}
+			error={error}
+			onFactClick={onFactClick}
+		/>
+	);
 };
 
 const mapStateToProps = (state) => ({

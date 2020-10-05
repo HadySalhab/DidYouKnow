@@ -41,20 +41,29 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const FactListItem = ({ fact }) => {
+const FactListItem = ({ fact, onFactClick }) => {
 	const classes = useStyles();
 	dayjs.extend(relativeTime);
 	return (
-		<Card className={classes.fact} variant="outlined">
+		<Card
+			className={classes.fact}
+			variant="outlined"
+			onClick={() => onFactClick(fact)}
+		>
 			<Box p={2}>
 				<Box display="flex">
-					<Avatar>
+					<MuiLink
+						onClick={(e) => e.stopPropagation()}
+						component={Link}
+						to={`/profile/${fact.username.username}`}
+					>
 						<Avatar alt={fact.username.username} src={fact.username.imageUrl} />
-					</Avatar>
+					</MuiLink>
 					<Box flexDirection="column" ml={2} flexGrow="1">
 						<Box mb={1}>
 							<Box display="flex">
 								<MuiLink
+									onClick={(e) => e.stopPropagation()}
 									component={Link}
 									to={`/profile/${fact.username.username}`}
 									color="secondary"
@@ -83,7 +92,12 @@ const FactListItem = ({ fact }) => {
 								<Typography variant="body2" component="span">
 									{fact.likeCount}
 								</Typography>
-								<IconButton className={classes.iconButton}>
+								<IconButton
+									className={classes.iconButton}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+								>
 									<FavoriteIcon />
 								</IconButton>
 							</Box>

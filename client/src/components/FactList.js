@@ -10,7 +10,7 @@ import FactListItem from "./FactListItem";
 
 const useStyles = makeStyles((theme) => ({}));
 
-const FactList = ({ facts, loading, error }) => {
+const FactList = ({ facts, loading, error, onFactClick }) => {
 	const classes = useStyles();
 	return (
 		<div>
@@ -27,7 +27,7 @@ const FactList = ({ facts, loading, error }) => {
 			{facts &&
 				facts.map((fact) => (
 					<Box key={fact.id} mb={1}>
-						<FactListItem fact={fact} />
+						<FactListItem fact={fact} onFactClick={onFactClick} />
 					</Box>
 				))}
 		</div>

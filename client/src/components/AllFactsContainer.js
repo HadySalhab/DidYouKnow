@@ -29,7 +29,18 @@ const AllFactsContainer = ({ getAllFacts, allFacts }) => {
 			fetchAllFacts();
 		}
 	}, []);
-	return <FactList facts={allFacts} loading={loading} error={error} />;
+	const onFactClick = (fact) => {
+		console.log(fact);
+	};
+
+	return (
+		<FactList
+			facts={allFacts}
+			loading={loading}
+			error={error}
+			onFactClick={onFactClick}
+		/>
+	);
 };
 
 const mapStateToProps = (state) => ({
