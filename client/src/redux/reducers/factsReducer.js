@@ -1,6 +1,6 @@
 import { GET_ALL_FACTS } from "../types";
 const initalState = {
-	allFacts: [],
+	allFacts: null,
 };
 
 const factsReducer = (state = initalState, action) => {

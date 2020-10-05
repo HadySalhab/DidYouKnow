@@ -25,7 +25,9 @@ const AllFactsContainer = ({ getAllFacts, allFacts }) => {
 				setError(getErrorMessageFromError(getAllFactsError));
 			}
 		};
-		fetchAllFacts();
+		if (!allFacts) {
+			fetchAllFacts();
+		}
 	}, []);
 	return <FactList facts={allFacts} loading={loading} error={error} />;
 };
