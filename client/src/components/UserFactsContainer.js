@@ -14,7 +14,7 @@ import {
 } from "../redux/actions/userActions";
 import { connect } from "react-redux";
 
-const ProfileFactsContainer = ({
+const UserFactsContainer = ({
 	authUser,
 	profileFacts,
 	getProfile,
@@ -72,7 +72,4 @@ const mapActionsToProps = {
 	clearProfile,
 };
 
-export default connect(
-	mapStateToProps,
-	mapActionsToProps
-)(ProfileFactsContainer);
+export default connect(mapStateToProps, mapActionsToProps)(UserFactsContainer);

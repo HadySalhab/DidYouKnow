@@ -10,9 +10,13 @@ import _ from "lodash";
 
 // Component
 import AllFactsContainer from "../components/AllFactsContainer";
-import ProfileFactsContainer from "../components/ProfileFactsContainer";
 import AuthProfileContainer from "../components/AuthProfileContainer";
+
+import UserFactsContainer from "../components/UserFactsContainer";
 import UserProfileContainer from "../components/UserProfileContainer";
+
+import FactProfileContainer from "../components/FactProfileContainer";
+import FactContainer from "../components/FactContainer";
 
 // Redux
 import { connect } from "react-redux";
@@ -43,15 +47,11 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 					<Grid item xs={12} md={7}>
 						<Switch>
 							<Route exact path="/" component={AllFactsContainer} />
-							<Route
-								exact
-								path="/facts/:factId"
-								render={() => <div>Single Fact</div>}
-							/>
+							<Route exact path="/facts/:factId" component={FactContainer} />
 							<Route
 								exact
 								path="/profile/:username"
-								component={ProfileFactsContainer}
+								component={UserFactsContainer}
 							/>
 						</Switch>
 					</Grid>
@@ -61,7 +61,7 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 							<Route
 								exact
 								path="/facts/:factId"
-								render={() => <div>fact profile</div>}
+								component={FactProfileContainer}
 							/>
 							<Route
 								exact
