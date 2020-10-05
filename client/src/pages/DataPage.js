@@ -11,6 +11,7 @@ import _ from "lodash";
 // Component
 import AllFactsContainer from "../components/AllFactsContainer";
 import ProfileFactsContainer from "../components/ProfileFactsContainer";
+import AuthProfileContainer from "../components/AuthProfileContainer";
 
 // Redux
 import { connect } from "react-redux";
@@ -35,10 +36,10 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 				<Grid
 					fullwidth="true"
 					container
-					spacing={4}
+					spacing={2}
 					direction={smallerThanMediumScreen ? "column-reverse" : "row"}
 				>
-					<Grid item xs={12} md={8}>
+					<Grid item xs={12} md={7}>
 						<Switch>
 							<Route exact path="/" component={AllFactsContainer} />
 							<Route
@@ -53,13 +54,20 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 							/>
 						</Switch>
 					</Grid>
-					<Grid
-						item
-						xs={12}
-						md={4}
-						style={{ maxWidth: "600px", margin: "0 auto" }}
-					>
-						Profile
+					<Grid item xs={12} md={5}>
+						<Switch>
+							<Route exact path="/" component={AuthProfileContainer} />
+							<Route
+								exact
+								path="/facts/:factId"
+								render={() => <div>fact profile</div>}
+							/>
+							<Route
+								exact
+								path="/profile/:username"
+								render={() => <div>user profile</div>}
+							/>
+						</Switch>
 					</Grid>
 				</Grid>
 			);
