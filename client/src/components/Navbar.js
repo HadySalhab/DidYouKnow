@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 // Redux
 import { logoutUser } from "../redux/actions/userActions";
 import { connect } from "react-redux";
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function PrimarySearchAppBar({ authUser, logoutUser }) {
+function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -61,7 +62,10 @@ function PrimarySearchAppBar({ authUser, logoutUser }) {
 
 	const handleSignout = () => {
 		logoutUser();
-
+		handleMenuClose();
+	};
+	const handleProfile = () => {
+		history.push(`/profile/${authUser.authUserData.username}`);
 		handleMenuClose();
 	};
 
@@ -123,7 +127,7 @@ function PrimarySearchAppBar({ authUser, logoutUser }) {
 				</IconButton>
 				<p>Notifications</p>
 			</MenuItem>
-			<MenuItem onClick={handleProfileMenuOpen}>
+			<MenuItem onClick={handleProfile}>
 				<IconButton
 					aria-label="account of current user"
 					aria-controls="primary-search-account-menu"
@@ -177,7 +181,7 @@ function PrimarySearchAppBar({ authUser, logoutUser }) {
 									aria-label="account of current user"
 									aria-controls={menuId}
 									aria-haspopup="true"
-									onClick={handleProfileMenuOpen}
+									onClick={handleProfile}
 									color="primary"
 								>
 									<Avatar
@@ -212,4 +216,6 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
 	logoutUser,
 };
-export default connect(mapStateToProps, mapActionsToProps)(PrimarySearchAppBar);
+export default withRouter(
+	connect(mapStateToProps, mapActionsToProps)(PrimarySearchAppBar)
+);

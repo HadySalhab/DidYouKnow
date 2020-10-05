@@ -59,8 +59,8 @@ function App({ authUser, ui }) {
 			<Fragment>
 				{ui.loading && <BrandPage />}
 				{ui.error && <ErrorPage />}
-				{shouldRenderNavbar() && <Navbar />}
 				<BrowserRouter>
+					{shouldRenderNavbar() && <Navbar />}
 					<Container maxWidth="md">
 						<Switch>
 							<Route
