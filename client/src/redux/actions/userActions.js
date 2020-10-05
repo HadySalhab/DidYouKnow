@@ -80,6 +80,10 @@ export const showAuthenticatedUserProfile = () => (dispatch) => {
 	const profile = _.omit(authUser.authUserData, ["facts,notifications,likes"]);
 	const { facts } = _.pick(authUser.authUserData, ["facts"]);
 	dispatch({
+		type: GET_PROFILE,
+		payload: profile,
+	});
+	dispatch({
 		type: GET_PROFILE_FACTS,
 		payload: facts.map((fact) => ({
 			...fact,

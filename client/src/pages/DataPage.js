@@ -12,6 +12,7 @@ import _ from "lodash";
 import AllFactsContainer from "../components/AllFactsContainer";
 import ProfileFactsContainer from "../components/ProfileFactsContainer";
 import AuthProfileContainer from "../components/AuthProfileContainer";
+import UserProfileContainer from "../components/UserProfileContainer";
 
 // Redux
 import { connect } from "react-redux";
@@ -65,7 +66,7 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 							<Route
 								exact
 								path="/profile/:username"
-								render={() => <div>user profile</div>}
+								component={UserProfileContainer}
 							/>
 						</Switch>
 					</Grid>

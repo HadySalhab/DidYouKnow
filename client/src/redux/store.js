@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 
 import authUserReducer from "./reducers/authUserReducer";
 import factsReducer from "./reducers/factsReducer";
+import profileReducer from "./reducers/profileReducer";
 import uiReducer from "./reducers/uiReducer";
 
 const initialState = {};
@@ -13,6 +14,7 @@ const reducers = combineReducers({
 	authUser: authUserReducer,
 	facts: factsReducer,
 	ui: uiReducer,
+	profile: profileReducer,
 });
 
 const composeEnhancers =
