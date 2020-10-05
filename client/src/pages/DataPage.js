@@ -32,7 +32,7 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 		if (!_.isEmpty(authUser.authUserData)) {
 			return (
 				<Grid
-					fullWidth
+					fullwidth="true"
 					container
 					spacing={4}
 					direction={smallerThanMediumScreen ? "column-reverse" : "row"}
