@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 // MUI
 import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // Utils
 import _ from "lodash";
@@ -16,6 +16,9 @@ import { connect } from "react-redux";
 import { getAuthenticatedUserDetails } from "../redux/actions/userActions";
 
 const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
+	const smallerThanMediumScreen = useMediaQuery((theme) =>
+		theme.breakpoints.down("sm")
+	);
 	useEffect(() => {
 		if (authUser.isAuthenticated) {
 			getAuthenticatedUserDetails();
@@ -28,7 +31,12 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 	const render = () => {
 		if (!_.isEmpty(authUser.authUserData)) {
 			return (
-				<Grid container spacing={4}>
+				<Grid
+					fullWidth
+					container
+					spacing={4}
+					direction={smallerThanMediumScreen ? "column-reverse" : "row"}
+				>
 					<Grid item xs={12} md={8}>
 						<Switch>
 							<Route exact path="/" component={AllFactsContainer} />
@@ -44,8 +52,13 @@ const DataPage = ({ getAuthenticatedUserDetails, authUser, history }) => {
 							/>
 						</Switch>
 					</Grid>
-					<Grid item xs="auto" md={4}>
-						<Hidden only={["xs", "sm"]}>Profile</Hidden>
+					<Grid
+						item
+						xs={12}
+						md={4}
+						style={{ maxWidth: "600px", margin: "0 auto" }}
+					>
+						Profile
 					</Grid>
 				</Grid>
 			);
