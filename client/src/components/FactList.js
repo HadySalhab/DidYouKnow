@@ -26,7 +26,7 @@ const FactList = ({ facts, loading, error }) => {
 			{error && <p>error</p>}
 			{facts &&
 				facts.map((fact) => (
-					<Box mb={1}>
+					<Box key={fact.id} mb={1}>
 						<FactListItem fact={fact} />
 					</Box>
 				))}
