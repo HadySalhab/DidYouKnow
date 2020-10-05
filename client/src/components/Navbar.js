@@ -64,6 +64,10 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 		logoutUser();
 		handleMenuClose();
 	};
+	const handleHome = () => {
+		history.push("/");
+		handleMenuClose();
+	};
 
 	const handleProfile = () => {
 		history.push(`/profile/${authUser.authUserData.username}`);
@@ -114,7 +118,7 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
-			<MenuItem>
+			<MenuItem onClick={handleHome}>
 				<IconButton aria-label="show 4 new mails" color="inherit">
 					<HomeIcon />
 				</IconButton>
@@ -166,7 +170,11 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 							</Typography>
 
 							<div className={classes.sectionDesktop}>
-								<IconButton aria-label="main page" color="primary">
+								<IconButton
+									onClick={handleHome}
+									aria-label="main page"
+									color="primary"
+								>
 									<HomeIcon />
 								</IconButton>
 								<IconButton
