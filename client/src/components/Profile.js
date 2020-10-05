@@ -1,6 +1,9 @@
 import React, { Fragment, useRef } from "react";
 import { Link } from "react-router-dom";
 
+// Components
+import EditProfile from "./EditProfile";
+
 // MUI
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
@@ -25,7 +28,21 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Profile = ({ user, withEdit, onImageChange, onEditImageClick }) => {
+const Profile = ({
+	user,
+	withEdit,
+	onImageChange,
+	onEditImageClick,
+	open,
+	onEditClick,
+	onEditDialogDismiss,
+	editData,
+	onBioChange,
+	onWebsiteChange,
+	onLocationChange,
+	onEditSubmit,
+	error,
+}) => {
 	const { imageUrl, website, location, bio, username, createdAt } = user;
 	const classes = useStyles();
 	const fileInput = useRef();
@@ -93,6 +110,19 @@ const Profile = ({ user, withEdit, onImageChange, onEditImageClick }) => {
 						<span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
 					</div>
 				</div>
+				{withEdit && (
+					<EditProfile
+						editData={editData}
+						open={open}
+						onEditClick={onEditClick}
+						onEditDialogDismiss={onEditDialogDismiss}
+						onBioChange={onBioChange}
+						onWebsiteChange={onWebsiteChange}
+						onLocationChange={onLocationChange}
+						onEditSubmit={onEditSubmit}
+						error={error}
+					/>
+				)}
 			</Box>
 		</Card>
 	);

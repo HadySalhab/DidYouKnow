@@ -62,7 +62,7 @@ module.exports.uploadAuthenticatedUserImage = asyncHandler(
 	}
 );
 
-// @desc      Upload authenticated user details
+// @desc      update authenticated user details
 // @route     POST /users/me/details
 // @access    Private
 module.exports.updateAuthenticatedUserDetails = asyncHandler(

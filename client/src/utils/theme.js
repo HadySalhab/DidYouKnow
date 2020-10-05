@@ -46,6 +46,7 @@ export default {
 			alignItems: "center",
 		},
 		profile: {
+			marginBottom: "16px",
 			"& .image-wrapper": {
 				textAlign: "center",
 				position: "relative",
