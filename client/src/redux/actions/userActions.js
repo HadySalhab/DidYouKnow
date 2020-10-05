@@ -1,10 +1,13 @@
 import axios from "axios";
+import _ from "lodash";
 import {
 	GET_AUTHENTICATED_USER_DETAILS,
 	SET_USER_AUTHENTICATED,
 	SET_USER_UNAUTHENTICATED,
 	GET_AUTHENTICATED_USER_DETAILS_LOADING,
 	GET_AUTHENTICATED_USER_DETAILS_ERROR,
+	GET_PROFILE_FACTS,
+	GET_PROFILE,
 } from "../types";
 import { getErrorMessageFromError } from "../../utils/functions";
 import { LOCALSTORAGE_TOKEN_KEY } from "../../utils/constants";
@@ -54,6 +57,23 @@ export const logoutUser = () => (dispatch) => {
 export const setUserAuthenticated = () => ({
 	type: SET_USER_AUTHENTICATED,
 });
+
+export const getProfile = (username) => async (dispatch) => {
+	const response = await axios.get(`/users/${username}`);
+	const profile = _.omit(response.data.data, ["facts"]);
+	const { facts } = _.pick(response.data.data, ["facts"]);
+	dispatch({
+		type: GET_PROFILE,
+		payload: profile,
+	});
+	dispatch({
+		type: GET_PROFILE_FACTS,
+		payload: facts.map((fact) => ({
+			...fact,
+			username: profile,
+		})),
+	});
+};
 
 const setAuthorizationHeader = (token) => {
 	const DYKtoken = `Bearer ${token}`;
