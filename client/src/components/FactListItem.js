@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import ChatIcon from "@material-ui/icons/Chat";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import MuiLink from "@material-ui/core/Link";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Card from "@material-ui/core/Card";
 
@@ -53,18 +54,14 @@ const FactListItem = ({ fact }) => {
 					<Box flexDirection="column" ml={2} flexGrow="1">
 						<Box mb={1}>
 							<Box display="flex">
-								<Link
-									className={classes.username}
+								<MuiLink
+									component={Link}
 									to={`/profile/${fact.username.username}`}
+									color="secondary"
+									variant="subtitle1"
 								>
-									<Typography
-										color="textPrimary"
-										variant="subtitle2"
-										component="p"
-									>
-										{fact.username.username}
-									</Typography>
-								</Link>
+									@{fact.username.username}
+								</MuiLink>
 								<Typography component="p" className={classes.date}>
 									{dayjs(fact.createdAt).fromNow()}
 								</Typography>
