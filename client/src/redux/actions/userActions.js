@@ -15,6 +15,8 @@ import { getErrorMessageFromError } from "../../utils/functions";
 import { LOCALSTORAGE_TOKEN_KEY } from "../../utils/constants";
 import store from "../store";
 
+// @desc      Login user
+// @route     POST /auth/login
 export const loginUser = (loginFormData) => async (dispatch) => {
 	const response = await axios.post("/auth/login", loginFormData);
 	setAuthorizationHeader(response.data.data);
@@ -23,6 +25,8 @@ export const loginUser = (loginFormData) => async (dispatch) => {
 	});
 };
 
+// @desc      Signup user
+// @route     POST /auth/signup
 export const signupUser = (signupFormData) => async (dispatch) => {
 	const response = await axios.post("/auth/signup", signupFormData);
 	setAuthorizationHeader(response.data.data);
@@ -31,6 +35,8 @@ export const signupUser = (signupFormData) => async (dispatch) => {
 	});
 };
 
+// @desc      Get authenticated user details
+// @route     GET /users/me/details
 export const getAuthenticatedUserDetails = () => async (dispatch) => {
 	dispatch({
 		type: GET_AUTHENTICATED_USER_DETAILS_LOADING,
@@ -59,6 +65,8 @@ export const setUserAuthenticated = () => ({
 	type: SET_USER_AUTHENTICATED,
 });
 
+// @desc      Get a single user
+// @route     GET /users/:username
 export const getProfile = (username) => async (dispatch) => {
 	const response = await axios.get(`/users/${username}`);
 	const profile = _.omit(response.data.data, ["facts"]);
