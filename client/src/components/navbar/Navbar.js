@@ -10,15 +10,16 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import HomeIcon from "@material-ui/icons/Home";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
 import { Box } from "@material-ui/core";
+
+// Components
+import NotificationContainer from "../notification/NotificationContainer";
 
 const useStyles = makeStyles((theme) => ({
 	...theme.spreadThis,
@@ -124,11 +125,7 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 				<p>Home</p>
 			</MenuItem>
 			<MenuItem>
-				<IconButton aria-label="show 11 new notifications" color="inherit">
-					<Badge badgeContent={11} color="secondary">
-						<NotificationsIcon />
-					</Badge>
-				</IconButton>
+				<NotificationContainer />
 				<p>Notifications</p>
 			</MenuItem>
 			<MenuItem onClick={handleProfileMenuOpen}>
@@ -179,14 +176,7 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 								>
 									<HomeIcon />
 								</IconButton>
-								<IconButton
-									aria-label="show 17 new notifications"
-									color="primary"
-								>
-									<Badge badgeContent={17} color="secondary">
-										<NotificationsIcon />
-									</Badge>
-								</IconButton>
+								<NotificationContainer />
 								<IconButton
 									edge="end"
 									aria-label="account of current user"
