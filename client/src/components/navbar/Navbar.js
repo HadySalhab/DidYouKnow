@@ -124,10 +124,9 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 				</IconButton>
 				<p>Home</p>
 			</MenuItem>
-			<MenuItem>
-				<NotificationContainer />
-				<p>Notifications</p>
-			</MenuItem>
+
+			<NotificationContainer />
+
 			<MenuItem onClick={handleProfileMenuOpen}>
 				<IconButton
 					aria-label="account of current user"

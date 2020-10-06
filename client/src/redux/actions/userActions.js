@@ -6,9 +6,7 @@ import {
 	SET_USER_UNAUTHENTICATED,
 	GET_AUTHENTICATED_USER_DETAILS_LOADING,
 	GET_AUTHENTICATED_USER_DETAILS_ERROR,
-	CLEAR_PROFILE,
-	GET_PROFILE,
-	CLEAR_FACTS,
+	MARK_NOTIFICATIONS_READ,
 } from "../types";
 import { getErrorMessageFromError } from "../../utils/functions";
 import { LOCALSTORAGE_TOKEN_KEY } from "../../utils/constants";
@@ -52,6 +50,15 @@ export const getAuthenticatedUserDetails = () => async (dispatch) => {
 			payload: getErrorMessageFromError(error),
 		});
 	}
+};
+
+// @desc      Mark notifications read
+// @route     POST /users/me/notifications
+export const markNotificationsRead = (notificationIds) => async (dispatch) => {
+	await axios.post(`users/me/notifications`, notificationIds);
+	dispatch({
+		type: MARK_NOTIFICATIONS_READ,
+	});
 };
 
 export const logoutUser = () => (dispatch) => {
