@@ -166,7 +166,10 @@ function PrimarySearchAppBar({ authUser, logoutUser, history }) {
 								variant="h6"
 								noWrap
 							>
-								DidYouKnow
+								DidYou
+								<Box component="span" className="secondary-txt-color">
+									Know
+								</Box>
 							</Typography>
 
 							<div className={classes.sectionDesktop}>
