@@ -4,6 +4,7 @@ import {
 	CLEAR_PROFILE_FACTS,
 	UPLOAD_IMAGE,
 	GET_FACT,
+	ADD_COMMENT,
 } from "../types";
 
 const initalState = {
@@ -70,6 +71,15 @@ const factsReducer = (state = initalState, action) => {
 			return {
 				...state,
 				fact: action.payload,
+			};
+		case ADD_COMMENT:
+			return {
+				...state,
+				fact: {
+					...state.fact,
+					commentCount: state.fact.commentCount + 1,
+					comments: [action.payload.comment, ...state.fact.comments],
+				},
 			};
 		default:
 			return state;

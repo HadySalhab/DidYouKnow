@@ -17,7 +17,13 @@ const useStyles = makeStyles((theme) => ({
 	submit: {},
 }));
 
-const CommentForm = ({ user, comment, onCommentChange, error = {} }) => {
+const CommentForm = ({
+	user,
+	comment,
+	onCommentChange,
+	error = {},
+	onSubmit,
+}) => {
 	const classes = useStyles();
 	return (
 		<Card className={classes.comment} variant="outlined">
@@ -26,7 +32,7 @@ const CommentForm = ({ user, comment, onCommentChange, error = {} }) => {
 					<Box mt={2}>
 						<Avatar alt={user.username} src={user.imageUrl} />
 					</Box>
-					<form className={classes.form}>
+					<form className={classes.form} onSubmit={onSubmit}>
 						<Box flexDirection="column" ml={2}>
 							<Box mb={1}>
 								<TextField

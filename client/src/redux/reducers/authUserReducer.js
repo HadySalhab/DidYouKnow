@@ -4,6 +4,7 @@ import {
 	SET_USER_UNAUTHENTICATED,
 	UPLOAD_IMAGE,
 	UPDATE_USER_DETAILS,
+	ADD_COMMENT,
 } from "../types";
 const initialState = {
 	isAuthenticated: false,
@@ -42,6 +43,21 @@ const authUserReducer = (state = initialState, action) => {
 				authUserData: {
 					...state.authUserData,
 					...action.payload,
+				},
+			};
+		case ADD_COMMENT:
+			return {
+				...state,
+				authUserData: {
+					...state.authUserData,
+					facts: state.authUserData.facts.map((fact) => {
+						if (fact.id === action.payload.factId) {
+							return {
+								...fact,
+								commentCount: fact.commentCount + 1,
+							};
+						}
+					}),
 				},
 			};
 		default:

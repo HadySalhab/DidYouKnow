@@ -1,5 +1,6 @@
-import { GET_ALL_FACTS, GET_PROFILE, GET_FACT } from "../types";
+import { GET_ALL_FACTS, GET_PROFILE, GET_FACT, ADD_COMMENT } from "../types";
 import axios from "axios";
+import store from "../store";
 import _ from "lodash";
 // @desc      Get all facts
 // @route     GET /facts
@@ -24,5 +25,22 @@ export const getFact = (factId) => async (dispatch) => {
 	dispatch({
 		type: GET_FACT,
 		payload: factDetails,
+	});
+};
+
+// @desc      Add comment to a fact
+// @route     POST /facts/:factId/comments
+export const addComment = (comment) => async (dispatch) => {
+	const currentDisplayedFact = store.getState().facts.fact;
+	const response = await axios.post(
+		`/facts/${currentDisplayedFact.id}/comments`,
+		{ body: comment }
+	);
+	dispatch({
+		type: ADD_COMMENT,
+		payload: {
+			factId: currentDisplayedFact.id,
+			comment: response.data.data,
+		},
 	});
 };
