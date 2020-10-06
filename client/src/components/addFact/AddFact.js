@@ -30,13 +30,18 @@ const AddFact = ({
 	const classes = useStyles();
 	return (
 		<Fragment>
-			<Box fullWidth display="flex" justifyContent="center" alignItems="center">
-				<IconButton color="action" onClick={onAddClick}>
+			<Box
+				fullwidth="true"
+				display="flex"
+				justifyContent="center"
+				alignItems="center"
+			>
+				<IconButton color="default" onClick={onAddClick}>
 					<AddCircleOutlineIcon fontSize="large" />
 				</IconButton>
 			</Box>
 
-			<Dialog open={open} fullWidth maxWidth="sm">
+			<Dialog open={open} fullwidth="true" maxWidth="sm">
 				<DialogTitle>Add New Fact</DialogTitle>
 				<DialogContent>
 					<form>
@@ -50,7 +55,7 @@ const AddFact = ({
 							className={classes.textField}
 							error={error.question ? true : false}
 							helperText={error.question}
-							fullWidth
+							fullwidth="true"
 						/>
 						<TextField
 							name="answer"
@@ -62,7 +67,7 @@ const AddFact = ({
 							className={classes.textField}
 							error={error.answer ? true : false}
 							helperText={error.answer}
-							fullWidth
+							fullwidth="true"
 						/>
 					</form>
 				</DialogContent>

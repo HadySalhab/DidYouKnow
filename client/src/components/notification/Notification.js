@@ -74,7 +74,7 @@ const Notification = ({
 						const time = dayjs(notification.createdAt).fromNow();
 						const iconColor = notification.read ? "primary" : "secondary";
 						return (
-							<MenuItem>
+							<MenuItem key={notification.id}>
 								{notification.type === "like" ? (
 									<FavoriteIcon color={iconColor} style={{ marginRight: 10 }} />
 								) : (
