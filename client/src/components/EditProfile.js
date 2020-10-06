@@ -44,7 +44,7 @@ const EditProfile = ({
 					<form>
 						<TextField
 							name="bio"
-							tpye="text"
+							type="text"
 							label="Bio"
 							multiline
 							rows="3"
@@ -58,7 +58,7 @@ const EditProfile = ({
 						/>
 						<TextField
 							name="website"
-							tpye="text"
+							type="text"
 							label="Website"
 							value={website}
 							onChange={onWebsiteChange}
@@ -70,7 +70,7 @@ const EditProfile = ({
 						/>
 						<TextField
 							name="location"
-							tpye="text"
+							type="text"
 							label="Location"
 							value={location}
 							onChange={onLocationChange}
