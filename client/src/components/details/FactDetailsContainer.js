@@ -3,9 +3,6 @@ import React, { useState, useEffect } from "react";
 // Components
 import FactDetails from "./FactDetails";
 
-// Util
-import { getErrorMessageFromError } from "../../utils/functions";
-
 // Redux
 import { getFact, clearFact } from "../../redux/actions/factsActions";
 import { connect } from "react-redux";
