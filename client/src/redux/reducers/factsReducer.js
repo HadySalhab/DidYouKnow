@@ -6,6 +6,7 @@ import {
 	GET_FACT,
 	ADD_COMMENT,
 	CLEAR_ALL_FACTS,
+	CLEAR_FACT,
 } from "../types";
 
 const initalState = {
@@ -26,11 +27,7 @@ const factsReducer = (state = initalState, action) => {
 				...state,
 				profileFacts: action.payload,
 			};
-		case CLEAR_PROFILE_FACTS:
-			return {
-				...state,
-				profileFacts: null,
-			};
+
 		case UPLOAD_IMAGE:
 			return {
 				...state,
@@ -99,6 +96,16 @@ const factsReducer = (state = initalState, action) => {
 			return {
 				...state,
 				allFacts: null,
+			};
+		case CLEAR_FACT:
+			return {
+				...state,
+				fact: null,
+			};
+		case CLEAR_PROFILE_FACTS:
+			return {
+				...state,
+				profileFacts: null,
 			};
 		default:
 			return state;

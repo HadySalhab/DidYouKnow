@@ -4,6 +4,8 @@ import {
 	GET_FACT,
 	ADD_COMMENT,
 	CLEAR_ALL_FACTS,
+	CLEAR_FACT,
+	CLEAR_PROFILE,
 } from "../types";
 import axios from "axios";
 import store from "../store";
@@ -54,3 +56,12 @@ export const addComment = (comment) => async (dispatch) => {
 export const clearAllFacts = () => ({
 	type: CLEAR_ALL_FACTS,
 });
+
+export const clearFact = () => (dispatch) => {
+	dispatch({
+		type: CLEAR_FACT,
+	});
+	dispatch({
+		type: CLEAR_PROFILE,
+	});
+};

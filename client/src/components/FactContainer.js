@@ -7,10 +7,10 @@ import FactDetails from "./FactDetails";
 import { getErrorMessageFromError } from "../utils/functions";
 
 // Redux
-import { getFact } from "../redux/actions/factsActions";
+import { getFact, clearFact } from "../redux/actions/factsActions";
 import { connect } from "react-redux";
 
-const FactContainer = ({ getFact, match, fact }) => {
+const FactContainer = ({ getFact, match, fact, clearFact }) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	useEffect(() => {
@@ -26,6 +26,9 @@ const FactContainer = ({ getFact, match, fact }) => {
 			}
 		};
 		fetchFact();
+		return () => {
+			clearFact();
+		};
 	}, []);
 
 	return <FactDetails fact={fact} />;
@@ -35,5 +38,6 @@ const mapStateToProps = (state) => ({
 });
 const mapActionsToProps = {
 	getFact,
+	clearFact,
 };
 export default connect(mapStateToProps, mapActionsToProps)(FactContainer);
