@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 

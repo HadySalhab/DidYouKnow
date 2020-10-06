@@ -9,7 +9,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 // Icons
-import EditIcon from "@material-ui/icons/Edit";
 const useStyles = makeStyles((theme) => ({
 	...theme.spreadThis,
 }));
@@ -52,8 +51,8 @@ const EditProfile = ({
 							onChange={onBioChange}
 							placeholder="A short bio about yourself"
 							className={classes.textField}
-							error={error.bio ? true : false}
-							helperText={error.bio}
+							error={error && error.bio ? true : false}
+							helperText={error && error.bio}
 							fullWidth
 						/>
 						<TextField
@@ -64,8 +63,8 @@ const EditProfile = ({
 							onChange={onWebsiteChange}
 							placeholder="Your personal/professinal website"
 							className={classes.textField}
-							error={error.website ? true : false}
-							helperText={error.website}
+							error={error && error.website ? true : false}
+							helperText={error && error.website}
 							fullWidth
 						/>
 						<TextField
@@ -76,8 +75,8 @@ const EditProfile = ({
 							onChange={onLocationChange}
 							placeholder="Where you live"
 							className={classes.textField}
-							error={error.location ? true : false}
-							helperText={error.location}
+							error={error && error.location ? true : false}
+							helperText={error && error.location}
 							fullWidth
 						/>
 					</form>

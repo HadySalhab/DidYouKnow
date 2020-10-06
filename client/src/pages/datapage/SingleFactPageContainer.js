@@ -36,6 +36,7 @@ const SinglePageContainer = ({ getFact, match, clearProfile, clearFact }) => {
 			clearFact();
 			clearProfile();
 		};
+		//eslint-disable-next-line
 	}, []);
 	const getFactComponent = () => {
 		if (loading) {

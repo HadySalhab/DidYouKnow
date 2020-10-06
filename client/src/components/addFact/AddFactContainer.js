@@ -49,6 +49,8 @@ const addReducer = (state, action) => {
 			};
 		case "RESET":
 			return initialState;
+		default:
+			return state;
 	}
 };
 const AddFactContainer = ({ addFact }) => {

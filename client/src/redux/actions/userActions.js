@@ -1,5 +1,4 @@
 import axios from "axios";
-import _ from "lodash";
 import {
 	GET_AUTHENTICATED_USER_DETAILS,
 	SET_USER_AUTHENTICATED,
@@ -10,7 +9,6 @@ import {
 } from "../types";
 import { getErrorMessageFromError } from "../../utils/functions";
 import { LOCALSTORAGE_TOKEN_KEY } from "../../utils/constants";
-import store from "../store";
 
 // @desc      Login user
 // @route     POST /auth/login

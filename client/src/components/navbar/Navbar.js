@@ -5,7 +5,7 @@ import { logoutUser } from "../../redux/actions/userActions";
 import { connect } from "react-redux";
 
 // MUI
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";

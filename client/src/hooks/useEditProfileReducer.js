@@ -59,8 +59,8 @@ const editProfileReducer = (state, action) => {
 			return state;
 	}
 };
-const useEditProfileReducer = (initState = {}) => {
-	const [state, dispatch] = useReducer(editProfileReducer, initState);
+const useEditProfileReducer = () => {
+	const [state, dispatch] = useReducer(editProfileReducer, initialState);
 	const openEditDialogWithState = (state) => {
 		dispatch({
 			type: OPEN_EDIT_DIALOG,

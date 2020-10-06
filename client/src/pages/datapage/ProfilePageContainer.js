@@ -36,6 +36,7 @@ const AllFactsPageContainer = ({ getProfile, match, history, clearFacts }) => {
 			clearFacts();
 			clearProfile();
 		};
+		//eslint-disable-next-line
 	}, [match.params.username]);
 
 	const getFactComponent = () => {

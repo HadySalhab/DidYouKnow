@@ -22,6 +22,8 @@ const notificationReducer = (state, action) => {
 				...state,
 				anchorEl: null,
 			};
+		default:
+			return state;
 	}
 };
 

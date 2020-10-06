@@ -58,6 +58,8 @@ const authUserReducer = (state = initialState, action) => {
 								...fact,
 								commentCount: fact.commentCount + 1,
 							};
+						} else {
+							return fact;
 						}
 					}),
 				},

@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 // Components
@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 const Profile = ({ user, withEdit, onImageChange, onEditImageClick }) => {
 	const { imageUrl, website, location, bio, username, createdAt } = user;
 	const classes = useStyles();
-	const fileInput = useRef();
 
 	dayjs.extend(relativeTime);
 

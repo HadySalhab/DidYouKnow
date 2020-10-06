@@ -48,6 +48,7 @@ const AllFactsPageContainer = ({
 			clearFacts();
 			clearProfile();
 		};
+		//eslint-disable-next-line
 	}, []);
 
 	const getFactComponent = () => {
