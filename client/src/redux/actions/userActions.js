@@ -64,14 +64,6 @@ export const setUserAuthenticated = () => ({
 	type: SET_USER_AUTHENTICATED,
 });
 
-export const clearProfile = () => (dispatch) => {
-	dispatch({
-		type: CLEAR_PROFILE,
-	});
-	dispatch({
-		type: CLEAR_FACTS,
-	});
-};
 const setAuthorizationHeader = (token) => {
 	const DYKtoken = `Bearer ${token}`;
 	localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, DYKtoken);
