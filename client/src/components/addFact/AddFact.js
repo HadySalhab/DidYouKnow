@@ -55,7 +55,7 @@ const AddFact = ({
 							className={classes.textField}
 							error={error.question ? true : false}
 							helperText={error.question}
-							fullwidth="true"
+							fullWidth
 						/>
 						<TextField
 							name="answer"
@@ -67,7 +67,7 @@ const AddFact = ({
 							className={classes.textField}
 							error={error.answer ? true : false}
 							helperText={error.answer}
-							fullwidth="true"
+							fullWidth
 						/>
 					</form>
 				</DialogContent>
