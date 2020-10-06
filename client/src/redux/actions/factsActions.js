@@ -1,4 +1,4 @@
-import { GET_ALL_FACTS, GET_PROFILE } from "../types";
+import { GET_ALL_FACTS, GET_PROFILE, GET_FACT } from "../types";
 import axios from "axios";
 import _ from "lodash";
 // @desc      Get all facts
@@ -20,5 +20,9 @@ export const getFact = (factId) => async (dispatch) => {
 	dispatch({
 		type: GET_PROFILE,
 		payload: username,
+	});
+	dispatch({
+		type: GET_FACT,
+		payload: factDetails,
 	});
 };

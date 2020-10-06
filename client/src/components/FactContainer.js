@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+// Components
+import FactDetails from "./FactDetails";
+
 // Util
 import { getErrorMessageFromError } from "../utils/functions";
 
@@ -7,7 +10,7 @@ import { getErrorMessageFromError } from "../utils/functions";
 import { getFact } from "../redux/actions/factsActions";
 import { connect } from "react-redux";
 
-const FactContainer = ({ getFact, match }) => {
+const FactContainer = ({ getFact, match, fact }) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	useEffect(() => {
@@ -25,9 +28,11 @@ const FactContainer = ({ getFact, match }) => {
 		fetchFact();
 	}, []);
 
-	return <div></div>;
+	return <FactDetails fact={fact} />;
 };
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+	fact: state.facts.fact,
+});
 const mapActionsToProps = {
 	getFact,
 };

@@ -1,14 +1,18 @@
 const primaryMainColor = "#323330";
+const primaryLightColor = "#5b5b59";
+const secondaryLightColor = "#e6bc3b";
 const secondaryMainColor = "#e0ac0a ";
 const secondaryDarkColor = "#e09a0c ";
 
 export default {
 	palette: {
 		primary: {
+			light: primaryLightColor,
 			main: primaryMainColor,
 			contrastText: "#fff",
 		},
 		secondary: {
+			light: secondaryLightColor,
 			main: secondaryMainColor,
 			dark: secondaryDarkColor,
 			contrastText: "#fff",

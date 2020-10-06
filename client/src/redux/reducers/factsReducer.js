@@ -3,11 +3,13 @@ import {
 	GET_PROFILE_FACTS,
 	CLEAR_PROFILE_FACTS,
 	UPLOAD_IMAGE,
+	GET_FACT,
 } from "../types";
 
 const initalState = {
 	allFacts: null,
 	profileFacts: null,
+	fact: null,
 };
 
 const factsReducer = (state = initalState, action) => {
@@ -56,6 +58,11 @@ const factsReducer = (state = initalState, action) => {
 							},
 						};
 					}),
+			};
+		case GET_FACT:
+			return {
+				...state,
+				fact: action.payload,
 			};
 		default:
 			return state;
