@@ -5,6 +5,7 @@ import {
 	UPLOAD_IMAGE,
 	GET_FACT,
 	ADD_COMMENT,
+	CLEAR_ALL_FACTS,
 } from "../types";
 
 const initalState = {
@@ -93,6 +94,11 @@ const factsReducer = (state = initalState, action) => {
 					commentCount: state.fact.commentCount + 1,
 					comments: [action.payload.comment, ...state.fact.comments],
 				},
+			};
+		case CLEAR_ALL_FACTS:
+			return {
+				...state,
+				allFacts: null,
 			};
 		default:
 			return state;

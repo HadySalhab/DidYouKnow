@@ -17,3 +17,4 @@ export const GET_PROFILE_FACTS = "GET_PROFILE_FACTS";
 export const CLEAR_PROFILE_FACTS = "CLEAR_PROFILE_FACTS";
 export const GET_FACT = "GET_FACT";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const CLEAR_ALL_FACTS = "CLEAR_ALL_FACTS";

@@ -1,4 +1,10 @@
-import { GET_ALL_FACTS, GET_PROFILE, GET_FACT, ADD_COMMENT } from "../types";
+import {
+	GET_ALL_FACTS,
+	GET_PROFILE,
+	GET_FACT,
+	ADD_COMMENT,
+	CLEAR_ALL_FACTS,
+} from "../types";
 import axios from "axios";
 import store from "../store";
 import _ from "lodash";
@@ -44,3 +50,7 @@ export const addComment = (comment) => async (dispatch) => {
 		},
 	});
 };
+
+export const clearAllFacts = () => ({
+	type: CLEAR_ALL_FACTS,
+});

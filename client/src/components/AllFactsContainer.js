@@ -7,10 +7,15 @@ import FactList from "./FactList";
 import { getErrorMessageFromError } from "../utils/functions";
 
 // Redux
-import { getAllFacts } from "../redux/actions/factsActions";
+import { getAllFacts, clearAllFacts } from "../redux/actions/factsActions";
 import { connect } from "react-redux";
 
-const AllFactsContainer = ({ getAllFacts, allFacts, history }) => {
+const AllFactsContainer = ({
+	getAllFacts,
+	allFacts,
+	history,
+	clearAllFacts,
+}) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	useEffect(() => {
@@ -25,9 +30,10 @@ const AllFactsContainer = ({ getAllFacts, allFacts, history }) => {
 				setError(getErrorMessageFromError(getAllFactsError));
 			}
 		};
-		if (!allFacts) {
-			fetchAllFacts();
-		}
+		fetchAllFacts();
+		return () => {
+			clearAllFacts();
+		};
 	}, []);
 
 	const onFactClick = (fact) => {
@@ -49,6 +55,7 @@ const mapStateToProps = (state) => ({
 });
 const mapActionsToProps = {
 	getAllFacts,
+	clearAllFacts,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(AllFactsContainer);
