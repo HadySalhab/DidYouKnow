@@ -10,6 +10,10 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
 	...theme.spreadThis,
+	comment: {
+		maxWidth: "600px",
+		margin: "0 auto",
+	},
 	form: {
 		flexGrow: "1",
 	},
