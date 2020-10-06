@@ -6,6 +6,8 @@ import {
 	CLEAR_ALL_FACTS,
 	CLEAR_FACT,
 	CLEAR_PROFILE,
+	ADD_LIKE,
+	REMOVE_LIKE,
 } from "../types";
 import axios from "axios";
 import store from "../store";
@@ -50,6 +52,26 @@ export const addComment = (comment) => async (dispatch) => {
 			factId: currentDisplayedFact.id,
 			comment: response.data.data,
 		},
+	});
+};
+
+// @desc      Add Like to a fact
+// @route     GET /facts/:factId/like
+export const addLike = (factId) => async (dispatch) => {
+	const response = await axios.get(`/facts/${factId}/like`);
+	dispatch({
+		type: ADD_LIKE,
+		payload: response.data.data,
+	});
+};
+
+// @desc      Remove Like from a fact
+// @route     GET /facts/:factId/unlike
+export const removeLike = (factId) => async (dispatch) => {
+	const response = await axios.get(`/facts/${factId}/unlike`);
+	dispatch({
+		type: REMOVE_LIKE,
+		payload: response.data.data,
 	});
 };
 

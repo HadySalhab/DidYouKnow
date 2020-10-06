@@ -19,3 +19,5 @@ export const GET_FACT = "GET_FACT";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const CLEAR_ALL_FACTS = "CLEAR_ALL_FACTS";
 export const CLEAR_FACT = "CLEAR_FACT";
+export const ADD_LIKE = "ADD_LIKE";
+export const REMOVE_LIKE = "REMOVE_LIKE";

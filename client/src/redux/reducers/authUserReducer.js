@@ -5,6 +5,8 @@ import {
 	UPLOAD_IMAGE,
 	UPDATE_USER_DETAILS,
 	ADD_COMMENT,
+	ADD_LIKE,
+	REMOVE_LIKE,
 } from "../types";
 const initialState = {
 	isAuthenticated: false,
@@ -56,6 +58,50 @@ const authUserReducer = (state = initialState, action) => {
 								...fact,
 								commentCount: fact.commentCount + 1,
 							};
+						}
+					}),
+				},
+			};
+		case ADD_LIKE:
+			return {
+				...state,
+				authUserData: {
+					...state.authUserData,
+					likes: [
+						{
+							username: state.authUserData.username,
+							fact: action.payload.id,
+						},
+						...state.authUserData.likes,
+					],
+					facts: state.authUserData.facts.map((fact) => {
+						if (fact.id === action.payload.id) {
+							return {
+								...fact,
+								likeCount: fact.likeCount + 1,
+							};
+						} else {
+							return fact;
+						}
+					}),
+				},
+			};
+		case REMOVE_LIKE:
+			return {
+				...state,
+				authUserData: {
+					...state.authUserData,
+					likes: state.authUserData.likes.filter(
+						(like) => like.fact !== action.payload.id
+					),
+					facts: state.authUserData.facts.map((fact) => {
+						if (fact.id === action.payload.id) {
+							return {
+								...fact,
+								likeCount: fact.likeCount - 1,
+							};
+						} else {
+							return fact;
 						}
 					}),
 				},

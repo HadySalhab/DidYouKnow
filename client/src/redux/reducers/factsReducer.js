@@ -7,6 +7,8 @@ import {
 	ADD_COMMENT,
 	CLEAR_ALL_FACTS,
 	CLEAR_FACT,
+	ADD_LIKE,
+	REMOVE_LIKE,
 } from "../types";
 
 const initalState = {
@@ -91,6 +93,72 @@ const factsReducer = (state = initalState, action) => {
 					commentCount: state.fact.commentCount + 1,
 					comments: [action.payload.comment, ...state.fact.comments],
 				},
+			};
+		case ADD_LIKE:
+			return {
+				...state,
+				allFacts:
+					state.allFacts &&
+					state.allFacts.map((fact) => {
+						if (fact.id === action.payload.id) {
+							return {
+								...fact,
+								likeCount: fact.likeCount + 1,
+							};
+						} else {
+							return fact;
+						}
+					}),
+				fact: state.fact &&
+					state.fact.id === action.payload.id && {
+						...state.fact,
+						likeCount: state.fact.likeCount + 1,
+					},
+				profileFacts:
+					state.profileFacts &&
+					state.profileFacts.map((fact) => {
+						if (fact.id === action.payload.id) {
+							return {
+								...fact,
+								likeCount: fact.likeCount + 1,
+							};
+						} else {
+							return fact;
+						}
+					}),
+			};
+		case REMOVE_LIKE:
+			return {
+				...state,
+				allFacts:
+					state.allFacts &&
+					state.allFacts.map((fact) => {
+						if (fact.id === action.payload.id) {
+							return {
+								...fact,
+								likeCount: fact.likeCount - 1,
+							};
+						} else {
+							return fact;
+						}
+					}),
+				fact: state.fact &&
+					state.fact.id === action.payload.id && {
+						...state.fact,
+						likeCount: state.fact.likeCount - 1,
+					},
+				profileFacts:
+					state.profileFacts &&
+					state.profileFacts.map((fact) => {
+						if (fact.id === action.payload.id) {
+							return {
+								...fact,
+								likeCount: fact.likeCount - 1,
+							};
+						} else {
+							return fact;
+						}
+					}),
 			};
 		case CLEAR_ALL_FACTS:
 			return {
