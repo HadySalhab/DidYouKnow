@@ -3,11 +3,12 @@ import React, { Fragment } from "react";
 // MUI
 import Box from "@material-ui/core/Box";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Typography from "@material-ui/core/Typography";
 
 // Components
 import FactListItem from "./FactListItem";
+import CommentFormContainer from "./CommentFormContainer";
 import Comment from "./Comment";
-import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	...theme.spreadThis,
@@ -36,6 +37,9 @@ const FactDetails = ({ fact }) => {
 						>
 							Comments{" "}
 						</Typography>
+					</Box>
+					<Box mb={2}>
+						<CommentFormContainer />
 					</Box>
 					{fact.comments.map((comment) => (
 						<Box key={comment.id} mb={1}>
