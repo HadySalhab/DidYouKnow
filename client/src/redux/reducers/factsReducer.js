@@ -58,6 +58,13 @@ const factsReducer = (state = initalState, action) => {
 							},
 						};
 					}),
+				fact: state.fact && {
+					...state.fact,
+					username: {
+						...state.fact.username,
+						imageUrl: action.payload.imageUrl,
+					},
+				},
 			};
 		case GET_FACT:
 			return {
