@@ -7,6 +7,7 @@ import {
 	ADD_COMMENT,
 	ADD_LIKE,
 	REMOVE_LIKE,
+	ADD_FACT,
 } from "../types";
 const initialState = {
 	isAuthenticated: false,
@@ -102,6 +103,14 @@ const authUserReducer = (state = initialState, action) => {
 							return fact;
 						}
 					}),
+				},
+			};
+		case ADD_FACT:
+			return {
+				...state,
+				authUserData: {
+					...state.authUserData,
+					facts: [action.payload, ...state.authUserData.facts],
 				},
 			};
 		default:

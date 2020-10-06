@@ -7,6 +7,7 @@ import {
 	ADD_COMMENT,
 	ADD_LIKE,
 	REMOVE_LIKE,
+	ADD_FACT,
 } from "../types";
 
 const initalState = {
@@ -117,6 +118,11 @@ const factsReducer = (state = initalState, action) => {
 						likeCount: state.fact.likeCount - 1,
 					},
 			};
+		case ADD_FACT:
+			return {
+				...state,
+				facts: [action.payload, ...state.facts],
+			};
 		case CLEAR_FACTS:
 			return {
 				...state,
@@ -127,6 +133,7 @@ const factsReducer = (state = initalState, action) => {
 				...state,
 				fact: null,
 			};
+
 		default:
 			return state;
 	}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 
 // Hooks
 import useUIReducer from "../../hooks/useUIReducer";
@@ -7,6 +7,7 @@ import useUIReducer from "../../hooks/useUIReducer";
 import DataPageLayout from "./DataPageLayout";
 
 // Components
+import AddFactContainer from "../../components/addFact/AddFactContainer";
 import FactListContainer from "../../components/factlist/FactListContainer";
 import ProfileContainer from "../../components/profile/ProfileContainer";
 import Loading from "../../components/loading/Loading";
@@ -56,7 +57,12 @@ const AllFactsPageContainer = ({
 		if (error) {
 			return <div>Error</div>;
 		}
-		return <FactListContainer history={history} />;
+		return (
+			<Fragment>
+				<AddFactContainer />
+				<FactListContainer history={history} />
+			</Fragment>
+		);
 	};
 
 	return (

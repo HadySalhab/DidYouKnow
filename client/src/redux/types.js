@@ -19,3 +19,4 @@ export const CLEAR_FACT = "CLEAR_FACT";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const ADD_LIKE = "ADD_LIKE";
 export const REMOVE_LIKE = "REMOVE_LIKE";
+export const ADD_FACT = "ADD_FACT";

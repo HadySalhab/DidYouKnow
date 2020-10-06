@@ -7,6 +7,7 @@ import {
 	CLEAR_FACT,
 	ADD_LIKE,
 	REMOVE_LIKE,
+	ADD_FACT,
 } from "../types";
 import axios from "axios";
 import store from "../store";
@@ -82,3 +83,13 @@ export const clearFacts = () => ({
 export const clearFact = () => ({
 	type: CLEAR_FACT,
 });
+
+// @desc      Create a fact
+// @route     POST /facts
+export const addFact = (factData) => async (dispatch) => {
+	const response = await axios.post("/facts", factData);
+	dispatch({
+		type: ADD_FACT,
+		payload: response.data.data,
+	});
+};
