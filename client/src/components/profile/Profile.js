@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // Components
 import EditProfileContainer from "../editProfile/EditProfileContainer";
-
+import EditImageContainer from "../editImage/EditImageContainer";
 // MUI
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
@@ -12,8 +12,6 @@ import Card from "@material-ui/core/Card";
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
-import EditIcon from "@material-ui/icons/Edit";
-import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
 
 // Util
@@ -41,23 +39,7 @@ const Profile = ({ user, withEdit, onImageChange, onEditImageClick }) => {
 				<div className={classes.profile}>
 					<div className="image-wrapper">
 						<img src={imageUrl} alt="profile" className="profile-image" />
-						{withEdit && (
-							<Fragment>
-								<input
-									accept="image/gif, image/jpeg, image/png"
-									ref={fileInput}
-									type="file"
-									hidden="hidden"
-									onChange={onImageChange}
-								/>
-								<IconButton
-									tip="Edit profile picture"
-									onClick={() => onEditImageClick(fileInput.current)}
-								>
-									<EditIcon color="primary" />
-								</IconButton>
-							</Fragment>
-						)}
+						{withEdit && <EditImageContainer />}
 					</div>
 					<hr />
 					<div className="profile-details">
