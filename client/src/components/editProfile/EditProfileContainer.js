@@ -1,23 +1,19 @@
-import React, { useEffect } from "react";
-
-// Hook
-import useEditProfileReducer from "../hooks/useEditProfileReducer";
+import React from "react";
 
 // Components
-import Profile from "./Profile";
+import EditProfile from "./EditProfile";
 
-// Redux
-import { connect } from "react-redux";
-import {
-	uploadImage,
-	updateUserDetails,
-} from "../redux/actions/profileActions";
+// Hook
+import useEditProfileReducer from "../../hooks/useEditProfileReducer";
 
 // Util
-import _ from "lodash";
-import { isValidUrl, isNullOrEmpty } from "../utils/functions";
+import { isValidUrl, isNullOrEmpty } from "../../utils/functions";
 
-const AuthProfileContainer = ({ authUser, uploadImage, updateUserDetails }) => {
+// Redux
+import { updateUserDetails } from "../../redux/actions/profileActions";
+import { connect } from "react-redux";
+
+const EditProfileContainer = ({ authUser, updateUserDetails }) => {
 	const {
 		bio,
 		website,
@@ -31,16 +27,6 @@ const AuthProfileContainer = ({ authUser, uploadImage, updateUserDetails }) => {
 		setWebsite,
 		setError,
 	} = useEditProfileReducer();
-
-	const onImageChange = (e) => {
-		const image = e.target.files[0];
-		const formData = new FormData();
-		formData.append("image", image, image.name);
-		uploadImage(formData);
-	};
-	const onEditImageClick = (fileInput) => {
-		fileInput.click();
-	};
 
 	const onEditSubmit = async () => {
 		let submitError = {};
@@ -60,18 +46,13 @@ const AuthProfileContainer = ({ authUser, uploadImage, updateUserDetails }) => {
 	};
 
 	return (
-		<Profile
-			user={_.pick(authUser.authUserData, [
-				"website",
-				"username",
-				"location",
-				"bio",
-				"imageUrl",
-				"createdAt",
-			])}
-			onImageChange={onImageChange}
-			onEditImageClick={onEditImageClick}
-			withEdit
+		<EditProfile
+			editData={{
+				website,
+				location,
+				bio,
+			}}
+			open={isEditDialogOpen}
 			onEditClick={() =>
 				openEditDialogWithState({
 					bio: authUser.authUserData.bio,
@@ -79,13 +60,7 @@ const AuthProfileContainer = ({ authUser, uploadImage, updateUserDetails }) => {
 					location: authUser.authUserData.location,
 				})
 			}
-			open={isEditDialogOpen}
 			onEditDialogDismiss={closeDialog}
-			editData={{
-				website,
-				location,
-				bio,
-			}}
 			onBioChange={setBio}
 			onWebsiteChange={setWebsite}
 			onLocationChange={setLocation}
@@ -94,15 +69,14 @@ const AuthProfileContainer = ({ authUser, uploadImage, updateUserDetails }) => {
 		/>
 	);
 };
-const mapActionsToProps = {
-	uploadImage,
-	updateUserDetails,
-};
 
 const mapStateToProps = (state) => ({
 	authUser: state.authUser,
 });
+const mapActionsToProps = {
+	updateUserDetails,
+};
 export default connect(
 	mapStateToProps,
 	mapActionsToProps
-)(AuthProfileContainer);
+)(EditProfileContainer);

@@ -2,21 +2,22 @@ import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // Page
-import SignupPage from "./SignupPage";
-import DataPage from "./DataPage";
+import SignupPage from "../signup/SignupPage";
+import DataPageRouter from "../datapage/DataPageRouter";
 
+// Redux
 import { connect } from "react-redux";
 
 const HomePage = ({ isAuthenticated, history }) => {
 	const getComponent = (routerProps) => {
 		if (routerProps.location.pathname === "/") {
 			if (isAuthenticated) {
-				return <DataPage {...routerProps} />;
+				return <DataPageRouter {...routerProps} />;
 			} else {
 				return <SignupPage {...routerProps} />;
 			}
 		} else {
-			return <DataPage {...routerProps} />;
+			return <DataPageRouter {...routerProps} />;
 		}
 	};
 

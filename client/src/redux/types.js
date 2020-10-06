@@ -12,12 +12,10 @@ export const SET_USER_AUTHENTICATED = "SET_USER_AUTHENTICATED";
 export const SET_USER_UNAUTHENTICATED = "SET_USER_UNAUTHENTICATED";
 
 // Facts
-export const GET_ALL_FACTS = "GET_ALL_FACTS";
-export const GET_PROFILE_FACTS = "GET_PROFILE_FACTS";
-export const CLEAR_PROFILE_FACTS = "CLEAR_PROFILE_FACTS";
+export const GET_FACTS = "GET_FACTS";
 export const GET_FACT = "GET_FACT";
-export const ADD_COMMENT = "ADD_COMMENT";
-export const CLEAR_ALL_FACTS = "CLEAR_ALL_FACTS";
+export const CLEAR_FACTS = "CLEAR_FACTS";
 export const CLEAR_FACT = "CLEAR_FACT";
+export const ADD_COMMENT = "ADD_COMMENT";
 export const ADD_LIKE = "ADD_LIKE";
 export const REMOVE_LIKE = "REMOVE_LIKE";

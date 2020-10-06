@@ -1,7 +1,7 @@
 import React from "react";
 
 // Redux
-import { addLike, removeLike } from "../redux/actions/factsActions";
+import { addLike, removeLike } from "../../redux/actions/factsActions";
 import { connect } from "react-redux";
 
 // Components

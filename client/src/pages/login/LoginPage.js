@@ -6,10 +6,16 @@ import Hidden from "@material-ui/core/Hidden";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 // Image
-import landingImage from "../assets/landing-image.png";
+import landingImage from "../../assets/landing-image.png";
 
-// Component
-import SignupFormContainer from "../components/SignupFormContainer";
+// Page
+import LoginFormContainer from "../../components/login/LoginFormContainer";
+
+// Redux
+import { connect } from "react-redux";
+
+// Util
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
 	...theme.spreadThis,
@@ -19,8 +25,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const SignupPage = () => {
+const LoginPage = ({ isAuthenticated, history }) => {
 	const classes = useStyles();
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			history.push("/");
+		}
+		// eslint-disable-next-line
+	}, [isAuthenticated]);
 
 	return (
 		<Grid
@@ -41,10 +54,14 @@ const SignupPage = () => {
 			</Grid>
 
 			<Grid item xs={12} md={6}>
-				<SignupFormContainer />
+				<LoginFormContainer />
 			</Grid>
 		</Grid>
 	);
 };
 
-export default SignupPage;
+const mapStateToProps = (state) => ({
+	isAuthenticated: state.authUser.isAuthenticated,
+});
+
+export default connect(mapStateToProps, null)(LoginPage);

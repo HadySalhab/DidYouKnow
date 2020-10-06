@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 // Redux
 import { connect } from "react-redux";
-import { addComment } from "../redux/actions/factsActions";
+import { addComment } from "../../redux/actions/factsActions";
 
 // Componnets
 import CommentForm from "./CommentForm";
 
 // Utils
-import { useInputSetter } from "../utils/functions";
+import { useInputSetter } from "../../utils/functions";
 
 const CommentFormContainer = ({ authUser, addComment }) => {
 	const [comment, setComment] = useState("");

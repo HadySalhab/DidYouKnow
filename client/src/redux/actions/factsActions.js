@@ -1,23 +1,23 @@
 import {
-	GET_ALL_FACTS,
-	GET_PROFILE,
+	GET_FACTS,
 	GET_FACT,
+	GET_PROFILE,
 	ADD_COMMENT,
-	CLEAR_ALL_FACTS,
+	CLEAR_FACTS,
 	CLEAR_FACT,
-	CLEAR_PROFILE,
 	ADD_LIKE,
 	REMOVE_LIKE,
 } from "../types";
 import axios from "axios";
 import store from "../store";
 import _ from "lodash";
+
 // @desc      Get all facts
 // @route     GET /facts
 export const getAllFacts = () => async (dispatch) => {
 	const response = await axios.get("/facts");
 	dispatch({
-		type: GET_ALL_FACTS,
+		type: GET_FACTS,
 		payload: response.data.data,
 	});
 };
@@ -75,15 +75,10 @@ export const removeLike = (factId) => async (dispatch) => {
 	});
 };
 
-export const clearAllFacts = () => ({
-	type: CLEAR_ALL_FACTS,
+export const clearFacts = () => ({
+	type: CLEAR_FACTS,
 });
 
-export const clearFact = () => (dispatch) => {
-	dispatch({
-		type: CLEAR_FACT,
-	});
-	dispatch({
-		type: CLEAR_PROFILE,
-	});
-};
+export const clearFact = () => ({
+	type: CLEAR_FACT,
+});

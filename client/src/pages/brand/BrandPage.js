@@ -1,6 +1,6 @@
 import React from "react";
 
-import landingImage from "../assets/landing-image.png";
+import landingImage from "../../assets/landing-image.png";
 
 // MUI
 import Box from "@material-ui/core/Box";

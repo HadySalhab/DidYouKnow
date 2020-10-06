@@ -1,6 +1,12 @@
 import axios from "axios";
-import { UPLOAD_IMAGE, UPDATE_USER_DETAILS } from "../types";
-
+import {
+	UPLOAD_IMAGE,
+	UPDATE_USER_DETAILS,
+	GET_PROFILE,
+	GET_FACTS,
+	CLEAR_PROFILE,
+} from "../types";
+import _ from "lodash";
 import store from "../store";
 
 // @desc      Upload authenticated user image
@@ -27,3 +33,35 @@ export const updateUserDetails = (details) => async (dispatch) => {
 		payload: response.data.data,
 	});
 };
+
+// @desc      Get a single user
+// @route     GET /users/:username
+export const getProfile = (username) => async (dispatch) => {
+	const response = await axios.get(`/users/${username}`);
+	const profile = _.omit(response.data.data, ["facts"]);
+	const { facts } = _.pick(response.data.data, ["facts"]);
+	dispatch({
+		type: GET_PROFILE,
+		payload: profile,
+	});
+	dispatch({
+		type: GET_FACTS,
+		payload: facts.map((fact) => ({
+			...fact,
+			username: profile,
+		})),
+	});
+};
+
+export const showAuthenticatedUserProfile = () => (dispatch) => {
+	const authUser = store.getState().authUser;
+	const profile = _.omit(authUser.authUserData, ["facts,notifications,likes"]);
+	dispatch({
+		type: GET_PROFILE,
+		payload: profile,
+	});
+};
+
+export const clearProfile = () => ({
+	type: CLEAR_PROFILE,
+});

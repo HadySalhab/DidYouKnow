@@ -6,9 +6,9 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 
 // Components
-import FactListItem from "./FactListItem";
-import CommentFormContainer from "./CommentFormContainer";
-import Comment from "./Comment";
+import FactListItem from "../factlist/FactListItem";
+import CommentFormContainer from "../commentForm/CommentFormContainer";
+import Comment from "../comment/Comment";
 
 const useStyles = makeStyles((theme) => ({
 	...theme.spreadThis,

@@ -9,14 +9,14 @@ import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 // Components
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 
 // Pages
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import BrandPage from "./pages/BrandPage";
-import ErrorPage from "./pages/ErrorPage";
-import NotFound from "./pages/NotFound";
+import HomePage from "./pages/home/HomePage";
+import LoginPage from "./pages/login/LoginPage";
+import BrandPage from "./pages/brand/BrandPage";
+import ErrorPage from "./pages/error/ErrorPage";
+import NotFound from "./pages/notfound/NotFound";
 
 // Utils
 import themeObject from "./utils/theme";

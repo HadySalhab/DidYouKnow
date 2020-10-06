@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 // Components
-import LikeContainer from "./LikeContainer";
+import LikeContainer from "../like/LikeContainer";
 
 // MUI
 import Box from "@material-ui/core/Box";

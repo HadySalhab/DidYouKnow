@@ -6,10 +6,9 @@ import {
 	SET_USER_UNAUTHENTICATED,
 	GET_AUTHENTICATED_USER_DETAILS_LOADING,
 	GET_AUTHENTICATED_USER_DETAILS_ERROR,
-	GET_PROFILE_FACTS,
-	GET_PROFILE,
 	CLEAR_PROFILE,
-	CLEAR_PROFILE_FACTS,
+	GET_PROFILE,
+	CLEAR_FACTS,
 } from "../types";
 import { getErrorMessageFromError } from "../../utils/functions";
 import { LOCALSTORAGE_TOKEN_KEY } from "../../utils/constants";
@@ -65,46 +64,12 @@ export const setUserAuthenticated = () => ({
 	type: SET_USER_AUTHENTICATED,
 });
 
-// @desc      Get a single user
-// @route     GET /users/:username
-export const getProfile = (username) => async (dispatch) => {
-	const response = await axios.get(`/users/${username}`);
-	const profile = _.omit(response.data.data, ["facts"]);
-	const { facts } = _.pick(response.data.data, ["facts"]);
-	dispatch({
-		type: GET_PROFILE,
-		payload: profile,
-	});
-	dispatch({
-		type: GET_PROFILE_FACTS,
-		payload: facts.map((fact) => ({
-			...fact,
-			username: profile,
-		})),
-	});
-};
-export const showAuthenticatedUserProfile = () => (dispatch) => {
-	const authUser = store.getState().authUser;
-	const profile = _.omit(authUser.authUserData, ["facts,notifications,likes"]);
-	const { facts } = _.pick(authUser.authUserData, ["facts"]);
-	dispatch({
-		type: GET_PROFILE,
-		payload: profile,
-	});
-	dispatch({
-		type: GET_PROFILE_FACTS,
-		payload: facts.map((fact) => ({
-			...fact,
-			username: profile,
-		})),
-	});
-};
 export const clearProfile = () => (dispatch) => {
 	dispatch({
 		type: CLEAR_PROFILE,
 	});
 	dispatch({
-		type: CLEAR_PROFILE_FACTS,
+		type: CLEAR_FACTS,
 	});
 };
 const setAuthorizationHeader = (token) => {

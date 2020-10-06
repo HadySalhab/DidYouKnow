@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 // Components
 import SignupForm from "./SignupForm";
 // Hooks
-import useAuthReducer from "../hooks/useAuthReducer";
+import useAuthReducer from "../../hooks/useAuthReducer";
 // Util
 import {
 	validateSignupFormAndReturn,
 	getErrorMessageFromError,
-} from "../utils/functions";
+} from "../../utils/functions";
 import _ from "lodash";
 
 // Redux
 import { connect } from "react-redux";
-import { signupUser } from "../redux/actions/userActions";
+import { signupUser } from "../../redux/actions/userActions";
 
 const SignupFormContainer = ({ signupUser, isAuthenticated, history }) => {
 	const {
