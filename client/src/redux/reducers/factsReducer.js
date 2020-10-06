@@ -65,6 +65,19 @@ const factsReducer = (state = initalState, action) => {
 						...state.fact.username,
 						imageUrl: action.payload.imageUrl,
 					},
+					comments: state.fact.comments.map((comment) => {
+						if (comment.username.username === action.payload.username) {
+							return {
+								...comment,
+								username: {
+									...comment.username,
+									imageUrl: action.payload.imageUrl,
+								},
+							};
+						} else {
+							return comment;
+						}
+					}),
 				},
 			};
 		case GET_FACT:
